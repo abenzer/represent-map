@@ -36,7 +36,20 @@ Setup should be super easy. Follow these steps:
 6. Challenge your newly-discovered neighbors to ping pong!
 
 
-GitHub Project
---------------
+License
+-------
 
-https://github.com/abenzer/represent-map
+RepresentMap uses the Creative Commons Attribution 2.0 Generic (CC BY 2.0) License.
+Your use of this code and all associated materials is bound by the terms of this license.
+For full information, please see this website: http://creativecommons.org/licenses/by/2.0/
+
+Attribution: The "Powered by RepresentMap" text and link must be left intact and visible
+on your map unless you've been explicit, written permission from any of the creators to
+remove it.
+
+
+Useful Links
+------------
+
+GitHub project: https://github.com/abenzer/represent-map
+Represent.LA twitter: http://www.twitter.com/representla
