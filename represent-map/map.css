@@ -1,0 +1,294 @@
+/* resets */
+*
+{
+  border: 0px;
+  padding: 0px;
+  margin: 0px;
+}
+ul
+{
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+img
+{
+  max-width: none;
+}
+form
+{
+  margin-bottom: 0px;
+}
+
+/* google maps */
+html, body, #map_canvas 
+{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-y: hidden;
+}
+#map_canvas
+{
+  top: 0px;
+  bottom: 0px;
+  z-index: 1;
+}
+
+
+/*  hide mobil menu */
+.menu_mobile
+{
+  display: none;
+}
+
+
+
+/* menubar */
+.menu
+{
+  position: absolute;
+  z-index: 2;
+  font-size: 20px;
+  font-weight: bold;
+  right: 0;
+  top: 0;
+  width: 240px;
+  height: 100%;
+  background-color: #fff;
+  border-left: 2px solid #777;
+}
+.menu > .wrapper
+{
+  padding: 20px;
+}
+.menu .logo
+{
+  text-align: center;
+}
+.menu .logo a
+{
+  display: inline-block;
+}
+.menu .logo a img
+{
+  display: block;
+}
+.menu .blurb
+{
+  color: #777;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 1.4em;
+  margin-top: 20px;
+}
+.menu .blurb span
+{
+  display: block;
+  color: #aaa;
+}
+.menu .blurb + .blurb
+{
+  margin-top: 15px;
+}
+.menu .add
+{
+  margin: 20px 0px 10px 0px;
+}
+.menu .info
+{
+  margin: 10px 0px 10px 0px;
+}
+.menu .add .btn,
+.menu .info .btn
+{
+  width: 130px;
+}
+.menu .share
+{
+  margin-top: 20px;
+  line-height: 16px;
+}
+.menu .share div,
+.menu .share iframe
+{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+
+
+
+/* filters menu */
+.menu .filters
+{
+  margin-top: 15px;
+}
+.menu .filters li + li
+{
+  margin-top: 10px;
+}
+.menu .filters li input,
+.menu .filters li label
+{
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1em;
+  font-size: 14px;
+}
+.menu .filters li label
+{
+  margin-bottom: 0px;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+.menu .filters li label span
+{
+  color: #999;
+}
+
+
+
+/* markers */
+.marker_label
+{
+  display: none;
+  position: relative; 
+  left: -50%; 
+  top: -8px;
+  white-space: nowrap; 
+  padding: 2px 4px; 
+  font-size: 8pt; 
+  background-color: rgba(0,0,0,.7); 
+  color: #fff;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+.marker_title
+{
+  font-weight: bold;
+}
+.marker_uri
+{
+  font-size: 9pt;
+  color: #999;
+}
+.marker_desc
+{
+  max-width: 300px;
+  color: #555;
+  font-size: 9pt;
+  margin-top: 10px;
+}
+.marker_address
+{
+  font-size: 8pt;
+  margin-top: 10px;
+  color: #999;
+}
+
+
+
+/* modals */
+.modal
+{
+  background-color: transparent;
+}
+.modal .modal-header
+{
+  background-color: #444;
+  color: #f5f5f5;
+  -moz-border-radius-topleft: 6px;
+  -moz-border-radius-topright: 6px;
+  -webkit-border-top-left-radius: 6px;
+  -webkit-border-top-right-radius: 6px;
+}
+.modal .modal-header h3
+{
+  text-shadow: 0px 1px 0px #000;
+}
+.modal .modal-body
+{
+  background-color: #fff;
+}
+.modal .close
+{
+  color: #fff;
+  opacity: .7;
+  text-shadow: 0px 1px 0px #000;
+}
+.modal .close:hover
+{
+  color: #fff;
+  opacity: 1;
+}
+
+
+/* add marker modal */
+#modal_add
+{
+  margin-top: -350px;
+}
+#modal_add .modal-body
+{
+  max-height: none;
+}
+#modal_add fieldset
+{
+  padding-top: 15px;
+}
+#modal_add .control-label
+{
+  font-weight: bold;
+}
+#modal_add .help-block
+{
+  font-size: 8pt;
+  color: #777;
+  max-width: 275px;
+}
+#modal_add .modal-footer
+{
+  text-align: left;
+}
+
+
+/* get info modal */
+#modal_info
+{
+  margin-top: -350px;
+}
+#modal_info .modal-body
+{
+  max-height: none;
+}
+#modal_info p
+{
+  margin-bottom: 15px;
+}
+#modal_info .connect a,
+#modal_info .connect span
+{
+  display: inline-block;
+  vertical-align: middle;
+}
+#modal_info .connect span
+{
+  margin-right: 5px;
+}
+#modal_info .badges
+{
+  width: 500px;
+  overflow: hidden;
+  clear: both;
+  text-align: center;
+  margin: 10px 0px;
+}
+#modal_info .badges li
+{
+  display: inline-block;
+  vertical-align: middle;
+  margin: 10px;
+}
