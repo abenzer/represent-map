@@ -16,13 +16,11 @@ RepresentMap was created by:
 - Sean Bonner (http://www.twitter.com/seanbonner)
 
 
-
 Requirements
 ------------
 
 - PHP5
 - MySQL
-
 
 
 Installation
@@ -36,7 +34,6 @@ Setup should be super easy. Follow these steps:
 4. Upload all of the files to your server.
 5. Populate your database. We recommend seeding it with some existing data before opening it up to your local community.
 6. Challenge your newly-discovered neighbors to ping pong!
-
 
 
 GitHub Project
