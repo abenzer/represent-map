@@ -277,8 +277,8 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
     <div class="menu">
       <div class="wrapper">
         <div class="logo">
-          <a href="http://represent.la/">
-            <img src="images/logo.png" alt="RepresentLA" />
+          <a href="./">
+            <img src="images/logo.png" alt="" />
           </a>
         </div>
         <ul class="filters">
