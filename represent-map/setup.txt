@@ -1,0 +1,34 @@
+
+About RepresentMap
+------------------
+
+Use RepresentMap to setup a website that visualizes your local startup community
+on a custom Google map.
+
+This code first originated from http://represent.la, our map of the Los Angeles
+startup community. The response was extremely positive, so we decided to spread
+the love and share the code with other startup communities. Let's visualize
+the world's startups together!
+
+RepresentMap was created by:
+- Alex Benzer (http://www.twitter.com/abenzer)
+- Tara Tiger Brown (http://www.twitter.com/tara)
+- Sean Bonner (http://www.twitter.com/seanbonner)
+
+
+Installation
+------------
+
+Setup should be super easy. Follow these steps:
+
+1. Create a new MySQL database and user.
+
+2. Use phpMyAdmin or another MySQL utility to run the newest SQL file in the /db directory.
+
+3. Open /include/db_example.php with your text editor. Enter your MySQL credentials in there. Rename the file to "db.php".
+
+4. Upload all of the files to your server.
+
+5. Populate your database. We recommend seeding it with some existing data before opening it up to your local community.
+
+6. Challenge your newly-discovered neighbors to ping pong!
