@@ -9,6 +9,15 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
 <!DOCTYPE html>
 <html>
   <head>
+    <!--
+    This site was based on the Represent.LA project by:
+    - Alex Benzer
+    - Tara Tiger Brown
+    - Sean Bonner
+    
+    Create a map for your startup community!
+    https://github.com/abenzer/represent-map
+    -->
     <title>represent.la - map of the Los Angeles startup community</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
@@ -325,10 +334,8 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
           <div class="fb-like" data-href="http://www.represent.la" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
         </div>
         <div class="blurb">
-          <span>Created by</span>
-          <a target="_blank" href="http://www.twitter.com/abenzer">@abenzer</a> +
-          <a target="_blank" href="http://www.twitter.com/tara">@tara</a> +
-          <a target="_blank" href="http://www.twitter.com/seanbonner">@seanbonner</a>
+          <!-- per our license, you may not remove this line -->
+          <?=$attribution?>
         </div>
       </div>
     </div>

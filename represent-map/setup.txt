@@ -39,12 +39,12 @@ Setup should be super easy. Follow these steps:
 License
 -------
 
-RepresentMap uses the Creative Commons Attribution 2.0 Generic (CC BY 2.0) License.
+RepresentMap uses the Creative Commons Attribution-ShareAlike 2.0 Generic (CC BY-SA 2.0) License.
 Your use of this code and all associated materials is bound by the terms of this license.
-For full information, please see this website: http://creativecommons.org/licenses/by/2.0/
+For full information, please see this website: http://creativecommons.org/licenses/by-sa/2.0/
 
-Attribution: The "Created with RepresentMap" text and link must be left intact and visible
-on your map unless you've been explicit, written permission from any of the creators to
+Attribution: The "Based on RepresentLA" text and link must be left intact and visible
+on your map unless you've been given explicit, written permission from any of the creators to
 remove it.
 
 
