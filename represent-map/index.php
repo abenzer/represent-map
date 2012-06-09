@@ -117,10 +117,10 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
         markers = new Array();
         <?php
           while($place = mysql_fetch_assoc($places)) {
-            $place[title] = addslashes(htmlspecialchars($place[title]));
-            $place[description] = addslashes(htmlspecialchars($place[description]));
+            $place[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[title])));
+            $place[description] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[description])));
             $place[uri] = addslashes(htmlspecialchars($place[uri]));
-            $place[address] = addslashes(htmlspecialchars($place[address]));
+            $place[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[address])));
             echo "
               markers.push(['".$place[title]."', '".$place[type]."', '".$place[lat]."', '".$place[lng]."', '".$place[description]."', '".$place[uri]."', '".$place[address]."']); 
             "; 
