@@ -1,4 +1,3 @@
-
 CREATE TABLE IF NOT EXISTS `places` (
   `id` int(9) NOT NULL AUTO_INCREMENT,
   `approved` int(1) NOT NULL,
@@ -14,4 +13,4 @@ CREATE TABLE IF NOT EXISTS `places` (
   `owner_email` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=777 ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
