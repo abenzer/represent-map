@@ -23,6 +23,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
     <meta charset="UTF-8">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="map.css" type="text/css" />
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="mobile.css" type="text/css" />
     <script src="/scripts/jquery-1.7.1.js" type="text/javascript" charset="utf-8"></script>
@@ -353,6 +354,17 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
             <img src="images/logo.png" alt="RepresentLA" />
           </a>
         </div>
+      </div>
+    </div>
+    
+    <!-- more info modal -->
+    <div class="modal hide" id="modal_info_mobile">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h3>About This Map</h3>
+      </div>
+      <div class="modal-body">
+        hey there
       </div>
     </div>
     

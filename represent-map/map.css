@@ -280,7 +280,7 @@ html, body, #map_canvas
 }
 #modal_info .badges
 {
-  width: 500px;
+  max-width: 500px;
   overflow: hidden;
   clear: both;
   text-align: center;

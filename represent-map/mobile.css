@@ -52,22 +52,12 @@ body
   padding: 8px 12px;
 }
 
-
-
-/* modals (mobile) */
-.modal
+#modal_info,
+#modal_add
 {
-  position: absolute;
+  margin: 10px 0px;
+  top: 0;
 }
-#modal_add .modal-body
-{
-  max-height: 200px;
-}
-#modal_info .modal-body
-{
-  max-height: 200px;
-}
-
 
 
 /* landscape styles */
@@ -77,3 +67,4 @@ body
     display: none;
   }
 }
+
