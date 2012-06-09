@@ -55,6 +55,7 @@ body
 #modal_info,
 #modal_add
 {
+  position: absolute;
   margin: 10px 0px;
   top: 0;
 }
