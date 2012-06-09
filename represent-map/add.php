@@ -8,7 +8,7 @@ function parseInput($value) {
   $value = htmlspecialchars($value);
   $value = str_replace("\r", "", $value);
   $value = str_replace("\n", "", $value);
-  return value;
+  return $value;
 }
 
 $owner_name = parseInput($_POST['owner_name']);
@@ -17,7 +17,7 @@ $title = parseInput($_POST['title']);
 $type = parseInput($_POST['type']);
 $address = parseInput($_POST['address']);
 $uri = parseInput($_POST['uri']);
-$description = htmlspecialchars($_POST['description']);
+$description = parseInput($_POST['description']);
 
 // validate fields
 if(empty($title) || empty($type) || empty($address) || empty($uri) || empty($description) || empty($owner_name) || empty($owner_email)) {
