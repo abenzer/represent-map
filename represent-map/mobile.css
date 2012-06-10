@@ -30,6 +30,10 @@ body
   overflow: hidden;
   padding: 5px 10px;
 }
+.menu_mobile .search
+{
+  display: none;
+}
 .menu_mobile .logo
 {
   float: left;
