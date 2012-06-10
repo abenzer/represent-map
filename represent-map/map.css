@@ -75,6 +75,24 @@ html, body, #map_canvas
 {
   display: block;
 }
+.menu .search
+{
+  padding-top: 10px;
+}
+.menu .search input
+{
+  width: 170px;
+}
+.typeahead.dropdown-menu
+{
+  max-width: 170px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.4);
+}
+.typeahead.dropdown-menu li
+{
+  font-size: 8pt;
+}
 .menu .blurb
 {
   color: #777;

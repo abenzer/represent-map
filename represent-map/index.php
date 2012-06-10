@@ -3,7 +3,6 @@ include "header.php";
 
 // get places
 $places = mysql_query("SELECT * FROM places WHERE approved='1'");
-
 ?>
 
 <!DOCTYPE html>
@@ -22,23 +21,26 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link href="/bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
-    <link href="/bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+    <link href="./bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="map.css" type="text/css" />
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="mobile.css" type="text/css" />
-    <script src="/scripts/jquery-1.7.1.js" type="text/javascript" charset="utf-8"></script>
-    <script src="/bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./scripts/jquery-1.7.1.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
+    <script src="./bootstrap/js/bootstrap-typeahead.js" type="text/javascript" charset="utf-8"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-    <script type="text/javascript" src="/scripts/label.js"></script>
+    <script type="text/javascript" src="./scripts/label.js"></script>
+    
     <script type="text/javascript">
       var map;
       var infowindow = null;
       var gmarkers = [];
+      var markerTitles =[];
       var highestZIndex = 0;  
       var agent = "default";
       var zoomControl = true;
-      
-      
+
+
       // detect browser agent
       $(document).ready(function(){
         if(navigator.userAgent.toLowerCase().indexOf("iphone") > -1 || navigator.userAgent.toLowerCase().indexOf("ipod") > -1) {
@@ -51,9 +53,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
         }
       }); 
 
-      
-      
-      
+
       function initialize() {
         // set map styles
         var mapStyles = [
@@ -77,7 +77,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
             ]
           }
         ];
-        
+
         // set map options
         var myOptions = {
           zoom: 12,
@@ -96,12 +96,12 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
         };
         map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
         zoomLevel = map.getZoom();
-            
+
         // prepare infowindow
         infowindow = new google.maps.InfoWindow({
           content: "holding..."
         });
-        
+
         // only show marker labels if zoomed in
         google.maps.event.addListener(map, 'zoom_changed', function() {
           zoomLevel = map.getZoom();
@@ -111,11 +111,11 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
             $(".marker_label").css("display", "inline");
           }
         });
-       
 
         // markers array: name, type (icon), lat, long, description, uri, address
         markers = new Array();
         <?php
+          $marker_id = 0;
           while($place = mysql_fetch_assoc($places)) {
             $place[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[title])));
             $place[description] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[description])));
@@ -123,43 +123,44 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
             $place[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[address])));
             echo "
               markers.push(['".$place[title]."', '".$place[type]."', '".$place[lat]."', '".$place[lng]."', '".$place[description]."', '".$place[uri]."', '".$place[address]."']); 
+              //markerTitles.push([{id: '".$marker_id."', title: '".$place[title]."'}]);
+              markerTitles[".$marker_id."] = '".$place[title]."';
             "; 
             switch($place[type]) {
-              case "startup":
-                $count[startup]++; break;
-              case "incubator":
-                $count[incubator]++; break;
-              case "accelerator":
-                $count[accelerator]++; break;
-              case "coworking":
-                $count[coworking]++; break;
-              case "investor":
-                $count[investor]++; break;
-              case "event":
-                $count[event]++; break;
+              case "startup": $count[startup]++; break;
+              case "incubator": $count[incubator]++; break;
+              case "accelerator": $count[accelerator]++; break;
+              case "coworking": $count[coworking]++; break;
+              case "investor": $count[investor]++; break;
+              case "event": $count[event]++; break;
             }
+            $marker_id++;
           }
         ?>
+            
+
+
         
+
         // add markers
         jQuery.each(markers, function(i, val) {
           infowindow = new google.maps.InfoWindow({
             content: ""
           });
-          
+
           // offset latlong ever so slightly to prevent marker overlap
           rand_x = Math.random();
           rand_y = Math.random();
           val[2] = parseFloat(val[2]) + parseFloat(parseFloat(rand_x) / 6000);
           val[3] = parseFloat(val[3]) + parseFloat(parseFloat(rand_y) / 6000);
-          
+
           // show smaller marker icons on mobile
           if(agent == "iphone") {
             var iconSize = new google.maps.Size(16,19);
           } else {
             iconSize = null;
           }
-          
+
           // build this marker
           var markerImage = new google.maps.MarkerImage("./images/icons/"+val[1]+".png", null, null, null, iconSize);
           var marker = new google.maps.Marker({
@@ -173,7 +174,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
           });
           marker.type = val[1];
           gmarkers.push(marker);
-          
+
           // add marker hover events (if not viewing on mobile)
           if(agent == "default") {
             google.maps.event.addListener(marker, "mouseover", function() {
@@ -189,7 +190,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
               }
             }); 
           }
-          
+
           // format marker URI for display and linking
           var markerURI = val[5];
           if(markerURI.substr(0,7) != "http://") {
@@ -197,7 +198,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
           }
           var markerURI_short = markerURI.replace("http://", "");
           var markerURI_short = markerURI_short.replace("www.", "");
-          
+
           // add marker click effects (open infowindow)
           google.maps.event.addListener(marker, 'click', function () {
             infowindow.setContent(
@@ -208,7 +209,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
             );
             infowindow.open(map, this);
           });
-          
+
           // add marker label
           var latLng = new google.maps.LatLng(val[2], val[3]);
           var label = new Label({
@@ -221,8 +222,25 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
           label.bindTo('clickable', marker);
           label.bindTo('zIndex', marker);
         });
+        
+        
+        // zoom to marker if selected in search typeahead list
+        $('#search').typeahead({
+          source: markerTitles, 
+          onselect: function(obj) {
+            marker_id = jQuery.inArray(obj, markerTitles);
+            if(marker_id) {
+              map.panTo(gmarkers[marker_id].getPosition());
+              map.setZoom(18);
+              google.maps.event.trigger(gmarkers[marker_id], 'click');
+            }
+            $("#search").val("");
+          }
+        });
+        
       } 
       
+
       // toggle (hide/show) markers of a given type
       function toggle(type) {
         if($("#filter_"+type).attr('checked') == "checked") {
@@ -231,7 +249,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
           hide(type); 
         }
       }
-      
+
       // hide all markers of a given type
       function hide(type) {
         for (var i=0; i<gmarkers.length; i++) {
@@ -250,13 +268,16 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
         }
       }
       
+      // submit search
+       $('#search').change(function() {
+         alert('hi');
+       });
+       
+       
       google.maps.event.addDomListener(window, 'load', initialize);
-      
-      
     </script>
     
     <? echo $head_html; ?>
-    
   </head>
   <body>
     
@@ -307,14 +328,10 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
             <input type="checkbox" id="filter_investor" checked="checked" onClick="toggle('investor')">
             <label for="filter_investor">Investors <span>(<?=0+$count[investor]?>)</span></label>
           </li>
-          <!--
-          <li>
-            <img src="./images/icons/event.png" alt="" />
-            <input type="checkbox" id="filter_event" checked="checked" onClick="toggle('event')">
-            <label for="filter_event">Upcoming Events <span>(<?=0+$count[event]?>)</span></label>
-          </li>
-          -->
         </ul>
+        <div class="search">
+          <input type="text" name="search" id="search" placeholder="Search" data-provide="typeahead" autocomplete="off" />
+        </div>
         <div class="add">
           <a href="#modal_add" class="btn btn-large btn-inverse" data-toggle="modal">Add Something!</a>
         </div>
