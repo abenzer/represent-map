@@ -94,7 +94,7 @@ html, body, #map_canvas
 }
 .menu .add
 {
-  margin: 20px 0px 10px 0px;
+  margin: 25px 0px 10px 0px;
 }
 .menu .info
 {
@@ -123,7 +123,7 @@ html, body, #map_canvas
 /* filters menu */
 .menu .filters
 {
-  margin-top: 15px;
+  margin: 15px 0px;
 }
 .menu .filters li + li
 {
@@ -147,6 +147,11 @@ html, body, #map_canvas
 .menu .filters li label span
 {
   color: #999;
+}
+.menu .filters li .icon
+{
+  width: 22px;
+  margin-right: 1px;
 }
 
 

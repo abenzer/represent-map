@@ -255,17 +255,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
       
     </script>
     
-    <!-- google analytics -->
-    <script type="text/javascript">
-      var _gaq = _gaq || [];
-      _gaq.push(['_setAccount', 'UA-32378786-1']);
-      _gaq.push(['_trackPageview']);
-      (function() {
-        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-      })();
-    </script>
+    <? echo $head_html; ?>
     
   </head>
   <body>
@@ -293,27 +283,33 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
         </div>
         <ul class="filters">
           <li>
+            <img class="icon" src="./images/icons/startup.png" alt="" />
             <input type="checkbox" id="filter_startup" checked="checked" onClick="toggle('startup')">
             <label for="filter_startup">Startups <span>(<?=0+$count[startup]?>)</span></label>
           </li>
           <li>
+            <img class="icon" src="./images/icons/accelerator.png" alt="" />
             <input type="checkbox" id="filter_accelerator" checked="checked" onClick="toggle('accelerator')">
             <label for="filter_accelerator">Accelerators <span>(<?=0+$count[accelerator]?>)</span></label>
           </li>
           <li>
+            <img class="icon" src="./images/icons/incubator.png" alt="" />
             <input type="checkbox" id="filter_incubator" checked="checked" onClick="toggle('incubator')">
             <label for="filter_incubator">Incubators <span>(<?=0+$count[incubator]?>)</span></label>
           </li>
           <li>
+            <img class="icon" src="./images/icons/coworking.png" alt="" />
             <input type="checkbox" id="filter_coworking" checked="checked" onClick="toggle('coworking')">
             <label for="filter_coworking">Coworking <span>(<?=0+$count[coworking]?>)</span></label>
           </li>
           <li>
+            <img class="icon" src="./images/icons/investor.png" alt="" />
             <input type="checkbox" id="filter_investor" checked="checked" onClick="toggle('investor')">
             <label for="filter_investor">Investors <span>(<?=0+$count[investor]?>)</span></label>
           </li>
           <!--
           <li>
+            <img src="./images/icons/event.png" alt="" />
             <input type="checkbox" id="filter_event" checked="checked" onClick="toggle('event')">
             <label for="filter_event">Upcoming Events <span>(<?=0+$count[event]?>)</span></label>
           </li>
