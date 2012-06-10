@@ -231,7 +231,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
             marker_id = jQuery.inArray(obj, markerTitles);
             if(marker_id) {
               map.panTo(gmarkers[marker_id].getPosition());
-              map.setZoom(18);
+              map.setZoom(15);
               google.maps.event.trigger(gmarkers[marker_id], 'click');
             }
             $("#search").val("");
