@@ -73,7 +73,7 @@ echo $admin_head;
         echo "
           <li>
             <div class='options'>
-              <a class='btn btn-small' href='edit.php?place_id=$place[id]'>Edit</a>
+              <a class='btn btn-small' href='edit.php?place_id=$place[id]&view=$view&search=$search&p=$p'>Edit</a>
               ";
               if($place[approved] == 1) {
                 echo "

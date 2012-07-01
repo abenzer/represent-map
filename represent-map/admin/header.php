@@ -17,6 +17,7 @@ else { $p = 1; }
 
 // get search
 if(isset($_GET['search'])) { $search = $_GET['search']; } 
+else if(isset($_POST['search'])) { $search = $_POST['search']; }
 else { $search = ""; }
 
 // make sure admin is logged in

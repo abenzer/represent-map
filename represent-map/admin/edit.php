@@ -29,7 +29,7 @@ if($task == "doedit") {
   $type = $_POST['type'];
   
   mysql_query("UPDATE places SET title='$title', type='$type', address='$address', uri='$uri', description='$description', owner_name='$owner_name', owner_email='$owner_email' WHERE id='$place_id' LIMIT 1") or die(mysql_error());
-  header("Location: index.php");
+  header("Location: index.php?view=$view&search=$search&p=$p");
   exit;
 }
 
@@ -96,6 +96,9 @@ if($task == "doedit") {
       <button type="submit" class="btn btn-primary">Save Changes</button>
       <input type="hidden" name="task" value="doedit" />
       <input type="hidden" name="place_id" value="<?=$place[id]?>" />
+      <input type="hidden" name="view" value="<?=$view?>" />
+      <input type="hidden" name="search" value="<?=$search?>" />
+      <input type="hidden" name="p" value="<?=$p?>" />
       <a href="index.php" class="btn" style="float: right;">Cancel</a>
     </div>
   </fieldset>
