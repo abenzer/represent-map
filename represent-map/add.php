@@ -27,7 +27,7 @@ if(empty($title) || empty($type) || empty($address) || empty($uri) || empty($des
 } else {
 
   // insert into db, wait for approval
-  $insert = mysql_query("INSERT INTO places (approved, title, type, address, uri, description, owner_name, owner_email) VALUES ('0', '$title', '$type', '$address', '$uri', '$description', '$owner_name', '$owner_email')") or die(mysql_error());
+  $insert = mysql_query("INSERT INTO places (approved, title, type, address, uri, description, owner_name, owner_email) VALUES (null, '$title', '$type', '$address', '$uri', '$description', '$owner_name', '$owner_email')") or die(mysql_error());
 
   // geocode new submission
   $hide_geocode_output = true;

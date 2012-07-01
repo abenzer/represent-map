@@ -2,7 +2,7 @@
 include "header.php";
 
 // get places
-$places = mysql_query("SELECT * FROM places WHERE approved='1'");
+$places = mysql_query("SELECT * FROM places WHERE approved='1' ORDER BY title");
 ?>
 
 <!DOCTYPE html>
@@ -123,24 +123,12 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
             $place[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[address])));
             echo "
               markers.push(['".$place[title]."', '".$place[type]."', '".$place[lat]."', '".$place[lng]."', '".$place[description]."', '".$place[uri]."', '".$place[address]."']); 
-              //markerTitles.push([{id: '".$marker_id."', title: '".$place[title]."'}]);
               markerTitles[".$marker_id."] = '".$place[title]."';
             "; 
-            switch($place[type]) {
-              case "startup": $count[startup]++; break;
-              case "incubator": $count[incubator]++; break;
-              case "accelerator": $count[accelerator]++; break;
-              case "coworking": $count[coworking]++; break;
-              case "investor": $count[investor]++; break;
-              case "event": $count[event]++; break;
-            }
+            $count[$place[type]]++;
             $marker_id++;
           }
         ?>
-            
-
-
-        
 
         // add markers
         jQuery.each(markers, function(i, val) {
@@ -240,6 +228,15 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
         
       } 
       
+      
+      // zoom to specific marker
+      function goToMarker(marker_id) {
+        if(marker_id) {
+          map.panTo(gmarkers[marker_id].getPosition());
+          map.setZoom(15);
+          google.maps.event.trigger(gmarkers[marker_id], 'click');
+        }
+      }
 
       // toggle (hide/show) markers of a given type
       function toggle(type) {
@@ -255,6 +252,7 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
         for (var i=0; i<gmarkers.length; i++) {
           if (gmarkers[i].type == type) {
             gmarkers[i].setVisible(false);
+            $(".list ."+type).css("display", "none");
           }
         }
       }
@@ -264,15 +262,34 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
         for (var i=0; i<gmarkers.length; i++) {
           if (gmarkers[i].type == type) {
             gmarkers[i].setVisible(true);
+            $(".list ."+type).css("display", "block");
           }
         }
       }
       
-      // submit search
-       $('#search').change(function() {
-         alert('hi');
-       });
-       
+      // toggle collapsible list
+      function toggleList() {
+        if($(".list").css("display") == "none") {
+          $(".list").css("display", "block"); 
+          $(".menu").addClass("expanded");
+          $("#list-toggle-button").html("Close List &#187;");
+          $("#list-toggle-button").blur();
+          $(".share").css("display", "block"); 
+        } else {
+          $(".list").css("display", "none"); 
+          $(".menu").removeClass("expanded");
+          $("#list-toggle-button").html("&#171; Open List");
+          $("#list-toggle-button").blur();
+        }
+      }
+      
+      // hover on list item
+      function markerListMouseOver(marker_id) {
+        $("#marker"+marker_id).css("display", "inline");
+      }
+      function markerListMouseOut(marker_id) {
+        $("#marker"+marker_id).css("display", "none");
+      }
        
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
@@ -336,7 +353,10 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
           <a href="#modal_add" class="btn btn-large btn-inverse" data-toggle="modal">Add Something!</a>
         </div>
         <div class="info">
-          <a href="#modal_info" class="btn btn-large" data-toggle="modal">More Info</a>
+          <a href="#modal_info" class="btn btn-large btn-info" data-toggle="modal">More Info</a>
+        </div>
+        <div class="list-toggle">
+          <a href="#" class="btn btn-large" id="list-toggle-button" onClick="toggleList()">&#171; Open List</a>
         </div>
         <div class="blurb">
           This map was made to connect and promote the Los Angeles tech startup community.
@@ -351,6 +371,26 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1'");
           <!-- per our license, you may not remove this line -->
           <?=$attribution?>
         </div>
+      </div>
+    </div>
+    
+    <!-- collapsible marker list -->
+    <div class="list">
+      <div class="wrapper">
+        <ul class="list-items">
+          <?php
+          $marker_id = 0;
+          $places = mysql_query("SELECT * FROM places WHERE approved='1' ORDER BY title");
+          while($place = mysql_fetch_assoc($places)) {
+            echo "
+              <li class='".$place[type]."'>
+                <a href='#' onMouseOver=\"markerListMouseOver('".$marker_id."')\" onMouseOut=\"markerListMouseOut('".$marker_id."')\" onClick=\"goToMarker('".$marker_id."');\">".$place[title]."</a>
+              </li>
+            ";
+            $marker_id++;
+          }
+          ?>
+        </ul>
       </div>
     </div>
     

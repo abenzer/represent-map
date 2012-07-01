@@ -12,6 +12,12 @@ $db_user = "";
 // database password
 $db_pass = "";
 
+// admin username
+$admin_user = "admin";
+
+// admin password
+$admin_pass = "letsgetmappy";
+
 // HTML that goes just before </head>
 $head_html = "";
 

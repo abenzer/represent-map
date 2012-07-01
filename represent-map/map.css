@@ -54,14 +54,18 @@ html, body, #map_canvas
   font-weight: bold;
   right: 0;
   top: 0;
-  width: 240px;
   height: 100%;
   background-color: #fff;
-  border-left: 2px solid #777;
+  box-shadow: 0px 0px 6px rgba(0,0,0,.6);
+}
+.menu.expanded > .wrapper
+{
+  margin-right: 225px;
 }
 .menu > .wrapper
 {
-  padding: 20px;
+  margin: 20px;
+  width: 190px;
 }
 .menu .logo
 {
@@ -74,24 +78,6 @@ html, body, #map_canvas
 .menu .logo a img
 {
   display: block;
-}
-.menu .search
-{
-  padding-top: 10px;
-}
-.menu .search input
-{
-  width: 170px;
-}
-.typeahead.dropdown-menu
-{
-  max-width: 170px;
-  overflow: hidden;
-  border: 1px solid rgba(0,0,0,.4);
-}
-.typeahead.dropdown-menu li
-{
-  font-size: 8pt;
 }
 .menu .blurb
 {
@@ -112,14 +98,15 @@ html, body, #map_canvas
 }
 .menu .add
 {
-  margin: 25px 0px 10px 0px;
+  margin: 15px 0px 10px 0px;
 }
 .menu .info
 {
   margin: 10px 0px 10px 0px;
 }
 .menu .add .btn,
-.menu .info .btn
+.menu .info .btn,
+.menu .list-toggle .btn
 {
   width: 130px;
 }
@@ -135,10 +122,10 @@ html, body, #map_canvas
   vertical-align: middle;
   margin-right: 2px;
 }
-
-
-
-/* filters menu */
+.menu .share .btn
+{
+  text-shadow: none;
+}
 .menu .filters
 {
   margin: 15px 0px;
@@ -170,6 +157,73 @@ html, body, #map_canvas
 {
   width: 22px;
   margin-right: 1px;
+}
+.menu .search input
+{
+  margin-top: 5px;
+  width: 150px;
+}
+
+
+
+
+/* collapsible list */
+.list
+{
+  display: none;
+  position: absolute;
+  z-index: 3;
+  font-size: 20px;
+  font-weight: bold;
+  right: 0;
+  top: 0;
+  width: 210px;
+  height: 100%;
+  background-color: #f6f6f6;
+  border-left: 1px solid #ccc;
+}
+.list > .wrapper
+{
+  position: absolute;
+  overflow-y: auto;
+  height: 100%;
+}
+.typeahead.dropdown-menu
+{
+  max-width: 170px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,.4);
+}
+.typeahead.dropdown-menu li
+{
+  font-size: 8pt;
+}
+.list .list-items
+{
+}
+.list .list-items li
+{
+  border-bottom: 1px solid #dfdfdf;
+}
+.list .list-items li a
+{
+  display: block;
+  font-size: 9pt;
+  padding: 10px;
+  outline: none;
+  color: #777;
+}
+.list .list-items li a:hover
+{
+  background-color: #fff;
+  text-decoration: none;
+  outline: none;
+  color: #444;
+}
+.list .list-items li a:active
+{
+  color: #fff;
+  background-color: #444;
 }
 
 

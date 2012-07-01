@@ -1,0 +1,152 @@
+*
+{
+  padding: 0px;
+  margin: 0px;
+}
+body
+{
+  font-family: arial, sans-serif;
+  color: #333;
+}
+ul
+{
+  list-style-type: none;
+  margin: 0px;
+}
+
+
+/* layout */
+#content
+{
+  padding: 70px;
+  width: 1000px;
+  min-width: 1000px;
+  min-width: 500px;
+  margin: 0px auto;
+  margin-top: 0px;
+}
+#admin
+{
+  border: 1px solid #ddd;
+  padding: 20px;
+  background-color: #f2f2f2;
+}
+
+
+/* navbar */
+.navbar .container
+{
+  width: 1000px;
+  min-width: 1000px;
+  padding: 7px 0px;
+}
+.navbar .active a
+{
+  border-radius: 6px;
+}
+.navbar .navbar-search input
+{
+  height: 25px;
+  width: 140px;
+}
+
+
+
+/* forms */
+.input
+{
+  height: 30px;
+}
+textarea.input
+{
+  height: 130px;
+}
+.input-large
+{
+  height: 35px;
+  padding-left: 7px;
+}
+.btn.disabled
+{
+  background-color: #ddd;
+  color: #777;
+  text-shadow: none;
+  border: none;
+}
+.input-xlarge 
+{
+  width: 400px;
+}
+
+
+/* admin layout */
+#admin
+{
+}
+#admin h1
+{
+  margin-bottom: 20px;
+}
+#admin h1 a
+{
+  float: right;
+}
+#admin h3
+{
+  margin-bottom: 20px;
+}
+#admin li
+{
+  overflow: hidden;
+  line-height: 160%;
+  font-size: 11pt;
+  border-top: 1px solid #ddd;
+  padding: 8px 0px;
+  color: #555;
+}
+#admin li:first-child
+{
+}
+#admin li:last-child
+{
+  padding-bottom: 0px;
+}
+#admin li a:hover
+{
+  text-decoration: none;
+}
+#admin li a .url
+{
+  color: #888;
+}
+#admin li a:hover .url
+{
+  color: #888;
+  text-decoration: none;
+}
+#admin li .options
+{
+  float: right;
+  overflow: hidden;
+}
+#admin li .options .btn
+{
+  margin-left: 5px;
+  padding: 4px 6px;
+}
+#admin li .place_info
+{
+  overflow: hidden;
+}
+#admin .pager
+{
+  margin-top: 30px;
+  margin-bottom: 0px;
+}
+
+
+/* login form */
+#login h1
+{
+  margin-bottom: 20px;
+}
