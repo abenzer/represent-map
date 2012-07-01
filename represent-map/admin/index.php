@@ -7,7 +7,7 @@ include "header.php";
 if($task == "hide") {
   $place_id = htmlspecialchars($_GET['place_id']);
   mysql_query("UPDATE places SET approved=0 WHERE id='$place_id'") or die(mysql_error());
-  header("Location: index.php");
+  header("Location: index.php?view=$view&search=$search&p=$p");
   exit;
 }
 
@@ -15,15 +15,15 @@ if($task == "hide") {
 if($task == "approve") {
   $place_id = htmlspecialchars($_GET['place_id']);
   mysql_query("UPDATE places SET approved=1 WHERE id='$place_id'") or die(mysql_error());
-  header("Location: index.php");
+  header("Location: index.php?view=$view&search=$search&p=$p");
   exit;
 }
 
 // completely delete marker from map
-if($task == "approve") {
+if($task == "delete") {
   $place_id = htmlspecialchars($_GET['place_id']);
   mysql_query("DELETE FROM places WHERE id='$place_id'") or die(mysql_error());
-  header("Location: index.php");
+  header("Location: index.php?view=$view&search=$search&p=$p");
   exit;
 }
 
@@ -78,21 +78,21 @@ echo $admin_head;
               if($place[approved] == 1) {
                 echo "
                   <a class='btn btn-small btn-success disabled'>Approve</a>
-                  <a class='btn btn-small btn-inverse' href='index.php?task=hide&place_id=$place[id]'>Reject</a>
+                  <a class='btn btn-small btn-inverse' href='index.php?task=hide&place_id=$place[id]&view=$view&search=$search&p=$p'>Reject</a>
                 ";
               } else if(is_null($place[approved])) {
                 echo "
-                  <a class='btn btn-small btn-success' href='index.php?task=approve&place_id=$place[id]'>Approve</a>
-                  <a class='btn btn-small btn-inverse' href='index.php?task=hide&place_id=$place[id]'>Reject</a>
+                  <a class='btn btn-small btn-success' href='index.php?task=approve&place_id=$place[id]&view=$view&search=$search&p=$p'>Approve</a>
+                  <a class='btn btn-small btn-inverse' href='index.php?task=hide&place_id=$place[id]&view=$view&search=$search&p=$p'>Reject</a>
                 ";
               } else if($place[approved] == 0) {
                 echo "
-                  <a class='btn btn-small btn-success' href='index.php?task=approve&place_id=$place[id]'>Approve</a>
+                  <a class='btn btn-small btn-success' href='index.php?task=approve&place_id=$place[id]&view=$view&search=$search&p=$p'>Approve</a>
                   <a class='btn btn-small btn-inverse disabled'>Reject</a>
                 ";
               }
               echo "
-              <a class='btn btn-small btn-danger' href='index.php?task=delete&place_id=$place[id]'>Delete</a>
+              <a class='btn btn-small btn-danger' href='index.php?task=delete&place_id=$place[id]&view=$view&search=$search&p=$p'>Delete</a>
             </div>
             <div class='place_info'>
               <a href='http://$place[uri]' target='_blank'>
