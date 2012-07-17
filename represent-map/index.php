@@ -164,7 +164,6 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1' ORDER BY title");
             var iconSize = new google.maps.Size(16,19);
           } else {
             iconSize = null;
-            var iconSize = new google.maps.Size(24,28);
           }
 
           // build this marker
