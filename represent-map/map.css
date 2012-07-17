@@ -5,6 +5,10 @@
   padding: 0px;
   margin: 0px;
 }
+body
+{
+  color: #555;
+}
 ul
 {
   list-style-type: none;
@@ -56,20 +60,16 @@ html, body, #map_canvas
   top: 0;
   height: 100%;
   background-color: #fff;
-  box-shadow: 0px 0px 6px rgba(0,0,0,.6);
+  width: 250px;
 }
-.menu.expanded > .wrapper
+.menu .wrapper
 {
-  margin-right: 225px;
-}
-.menu > .wrapper
-{
-  margin: 20px;
-  width: 190px;
+  height: 320px;
+  border-left: 1px solid #ccc;
 }
 .menu .logo
 {
-  text-align: center;
+  padding: 5px 10px 0px 10px;
 }
 .menu .logo a
 {
@@ -84,36 +84,23 @@ html, body, #map_canvas
   color: #777;
   font-size: 11px;
   font-weight: normal;
-  line-height: 1.4em;
-  margin-top: 20px;
+  line-height: 130%;
+  padding: 5px 15px 0px 15px;
 }
-.menu .blurb span
+.menu .buttons
 {
-  display: block;
-  color: #aaa;
+  padding: 10px 15px 5px 15px;
 }
-.menu .blurb + .blurb
+.menu .buttons .btn
 {
-  margin-top: 15px;
-}
-.menu .add
-{
-  margin: 15px 0px 10px 0px;
-}
-.menu .info
-{
-  margin: 10px 0px 10px 0px;
-}
-.menu .add .btn,
-.menu .info .btn,
-.menu .list-toggle .btn
-{
-  width: 130px;
+  font-size: 8pt;
+  padding: 6px 8px;
 }
 .menu .share
 {
-  margin-top: 20px;
-  line-height: 16px;
+  color: #777;
+  line-height: 0px;
+  padding: 5px 15px 5px 15px;
 }
 .menu .share div,
 .menu .share iframe
@@ -145,6 +132,7 @@ html, body, #map_canvas
 .menu .filters li label
 {
   margin-bottom: 0px;
+  padding: 5px 0px;
   cursor: pointer;
   -moz-user-select: none;
   -webkit-user-select: none;
@@ -158,10 +146,15 @@ html, body, #map_canvas
   width: 22px;
   margin-right: 1px;
 }
+.menu .search
+{
+  padding: 10px 0px 10px 15px;
+}
 .menu .search input
 {
   margin-top: 5px;
-  width: 150px;
+  width: 200px;
+  font-size: 8pt;
 }
 
 
@@ -170,23 +163,15 @@ html, body, #map_canvas
 /* collapsible list */
 .list
 {
-  display: none;
-  position: absolute;
   z-index: 3;
-  font-size: 20px;
-  font-weight: bold;
   right: 0;
   top: 0;
-  width: 210px;
-  height: 100%;
-  background-color: #f6f6f6;
+  height: 100px;
   border-left: 1px solid #ccc;
-}
-.list > .wrapper
-{
-  position: absolute;
+  border-top: 1px solid #ccc;
   overflow-y: auto;
-  height: 100%;
+  height: 100px;
+  background-color: #333;
 }
 .typeahead.dropdown-menu
 {
@@ -198,20 +183,58 @@ html, body, #map_canvas
 {
   font-size: 8pt;
 }
+.list .category
+{
+  font-size: 11pt;
+  background-color: #282828;
+  color: #eee;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+  overflow: hidden;
+}
+.list .category img
+{
+  margin-right: 5px;
+}
+.list .category span
+{
+  opacity: .5;
+}
+.list .category .category_info
+{
+  display: block;
+  overflow: hidden;
+  padding: 3px 6px;
+  color: #eee;
+  background-color: #333;
+}
+.list .category .category_info:hover 
+{
+  background-color: #383838;
+  text-decoration: none;
+}
+.list .category .category_toggle
+{
+  float: right;
+  padding: 10px;
+}
 .list .list-items
 {
+  display: none;
 }
 .list .list-items li
 {
-  border-bottom: 1px solid #dfdfdf;
+  border-bottom: 1px solid #eaeaea;
 }
 .list .list-items li a
 {
   display: block;
-  font-size: 9pt;
-  padding: 10px;
+  font-size: 8pt;
+  padding: 5px 10px;
   outline: none;
-  color: #777;
+  color: #555;
+  font-weight: normal;
+  background-color: #f5f5f5;
+  line-height: 1.4em; 
 }
 .list .list-items li a:hover
 {
@@ -369,3 +392,4 @@ html, body, #map_canvas
   vertical-align: middle;
   margin: 10px;
 }
+

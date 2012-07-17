@@ -28,7 +28,12 @@ if($task == "doedit") {
   $owner_email = $_POST['owner_email'];
   $type = $_POST['type'];
   
-  mysql_query("UPDATE places SET title='$title', type='$type', address='$address', uri='$uri', description='$description', owner_name='$owner_name', owner_email='$owner_email' WHERE id='$place_id' LIMIT 1") or die(mysql_error());
+  mysql_query("UPDATE places SET title='$title', type='$type', address='$address', uri='$uri', lat='', lng='', description='$description', owner_name='$owner_name', owner_email='$owner_email' WHERE id='$place_id' LIMIT 1") or die(mysql_error());
+  
+  // geocode
+  $hide_geocode_output = true;
+  include "../geocode.php";
+  
   header("Location: index.php?view=$view&search=$search&p=$p");
   exit;
 }
@@ -59,6 +64,7 @@ if($task == "doedit") {
           <option<? if($place[type] == "incubator") {?> selected="selected"<? } ?>>incubator</option>
           <option<? if($place[type] == "coworking") {?> selected="selected"<? } ?>>coworking</option>
           <option<? if($place[type] == "investor") {?> selected="selected"<? } ?>>investor</option>
+          <option<? if($place[type] == "service") {?> selected="selected"<? } ?>>service</option>
         </select>
       </div>
     </div>
