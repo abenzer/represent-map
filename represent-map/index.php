@@ -1,8 +1,6 @@
 <?php
 include "header.php";
 
-// get places
-$places = mysql_query("SELECT * FROM places WHERE approved='1' ORDER BY title");
 ?>
 
 <!DOCTYPE html>
@@ -132,18 +130,30 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1' ORDER BY title");
         // markers array: name, type (icon), lat, long, description, uri, address
         markers = new Array();
         <?php
+          $types = Array(
+              Array('startup', 'Startups'),
+              Array('accelerator','Accelerators'),
+              Array('incubator', 'Incubators'), 
+              Array('coworking', 'Coworking'), 
+              Array('investor', 'Investors'),
+              Array('service', 'Consulting'),
+              );
           $marker_id = 0;
-          while($place = mysql_fetch_assoc($places)) {
-            $place[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[title])));
-            $place[description] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[description])));
-            $place[uri] = addslashes(htmlspecialchars($place[uri]));
-            $place[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[address])));
-            echo "
-              markers.push(['".$place[title]."', '".$place[type]."', '".$place[lat]."', '".$place[lng]."', '".$place[description]."', '".$place[uri]."', '".$place[address]."']); 
-              markerTitles[".$marker_id."] = '".$place[title]."';
-            "; 
-            $count[$place[type]]++;
-            $marker_id++;
+          foreach($types as $type) {
+            $places = mysql_query("SELECT * FROM places WHERE approved='1' AND type='$type[0]' ORDER BY title");
+            $places_total = mysql_num_rows($places);
+            while($place = mysql_fetch_assoc($places)) {
+              $place[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[title])));
+              $place[description] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[description])));
+              $place[uri] = addslashes(htmlspecialchars($place[uri]));
+              $place[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[address])));
+              echo "
+                markers.push(['".$place[title]."', '".$place[type]."', '".$place[lat]."', '".$place[lng]."', '".$place[description]."', '".$place[uri]."', '".$place[address]."']); 
+                markerTitles[".$marker_id."] = '".$place[title]."';
+              "; 
+              $count[$place[type]]++;
+              $marker_id++;
+            }
           }
         ?>
 
@@ -242,7 +252,6 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1' ORDER BY title");
             $("#search").val("");
           }
         });
-
       } 
 
 
@@ -355,8 +364,8 @@ $places = mysql_query("SELECT * FROM places WHERE approved='1' ORDER BY title");
               Array('investor', 'Investors'),
               Array('service', 'Consulting'),
               );
+          $marker_id = 0;
           foreach($types as $type) {
-            $marker_id = 0;
             $places = mysql_query("SELECT * FROM places WHERE approved='1' AND type='$type[0]' ORDER BY title");
             $places_total = mysql_num_rows($places);
             echo "
