@@ -115,7 +115,7 @@ echo $admin_head;
           <a href="index.php?view=<?=$view?>&search=<?=$search?>&p=<? echo $p-1; ?>">&larr; Previous</a>
         </li>
       <? } ?>
-      <? if($total >= $items_per_page) { ?>
+      <? if($total >= $items_per_page * $p) { ?>
         <li class="next">
           <a href="index.php?view=<?=$view?>&search=<?=$search?>&p=<? echo $p+1; ?>">Next &rarr;</a>
         </li>
