@@ -29,7 +29,7 @@ Installation
 Setup should be super easy. Follow these steps:
 
 1. Create a new MySQL database and user.
-2. Use phpMyAdmin or another MySQL utility to run the newest SQL file in the /db directory.
+2. Use phpMyAdmin or another MySQL utility to run the newest "places" SQL file in the /db directory.
 3. Open /include/db_example.php with your text editor. Enter your MySQL credentials in there. Also, replace "letsgetmappy" with a new password for the admin panel. Rename the file to "db.php".
 4. Upload all of the files to your server.
 5. Populate your database. We recommend seeding it with some existing data before opening it up to your local community.
@@ -44,9 +44,10 @@ Setup should be super easy. Follow these steps:
 Optional. Show Eventbrite events on your map!
 
 1. Make sure you've configured your "db.php" with your Eventbrite API key and search parameters.
-2. Run "events_get.php" in your browser anytime you want to get new events. By default, events
+2. Use phpMyAdmin or another MySQL utility to run the newest "events" SQL file in the /db directory.
+3. Run "events_get.php" in your browser anytime you want to get new events. By default, events
    should be displayed on your map up to 1 month before their start date.
-3. If you want this script to run automatically (once a day would make sense), you can setup a
+4. If you want this script to run automatically (once a day would make sense), you can setup a
    chron on your server. If you don't know how to do that, ask your hosting provider.
 
 
