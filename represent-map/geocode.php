@@ -18,6 +18,7 @@ geocode("events");
 
 // geocode function
 function geocode($table) {
+  global $hide_geocode_output;
 
   // get places that don't have latlong values
   $result = mysql_query("SELECT * FROM $table WHERE lat=0 OR lng=0") or die(mysql_error());
