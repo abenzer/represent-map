@@ -137,6 +137,7 @@ include "header.php";
               Array('coworking', 'Coworking'), 
               Array('investor', 'Investors'),
               Array('service', 'Consulting'),
+              Array('hackerspace', 'Hackerspaces'),
               );
           $marker_id = 0;
           foreach($types as $type) {
@@ -363,6 +364,7 @@ include "header.php";
               Array('coworking', 'Coworking'), 
               Array('investor', 'Investors'),
               Array('service', 'Consulting'),
+              Array('hackerspace', 'Hackerspaces'),
               );
           $marker_id = 0;
           foreach($types as $type) {
@@ -501,6 +503,7 @@ include "header.php";
                   <option value="coworking">Coworking</option>
                   <option value="investor">VC/Angel</option>
                   <option value="service">Consulting Firm</option>
+                  <option value="hackerspace">Hackerspace</option>
                 </select>
               </div>
             </div>
