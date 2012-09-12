@@ -173,6 +173,7 @@ include "header.php";
               Array('coworking', 'Coworking'), 
               Array('investor', 'Investors'),
               Array('service', 'Consulting'),
+              Array('hackerspace', 'Hackerspaces'),
               Array('event', 'Events'),
               );
           $marker_id = 0;
@@ -420,7 +421,8 @@ include "header.php";
               Array('incubator', 'Incubators'), 
               Array('coworking', 'Coworking'), 
               Array('investor', 'Investors'),
-              Array('service', 'Consulting')
+              Array('service', 'Consulting'),
+              Array('hackerspace', 'Hackerspaces'),
               );
           if($show_events == true) {
             $types[] = Array('event', 'Events'); 
@@ -564,6 +566,7 @@ include "header.php";
                   <option value="coworking">Coworking</option>
                   <option value="investor">VC/Angel</option>
                   <option value="service">Consulting Firm</option>
+                  <option value="hackerspace">Hackerspace</option>
                 </select>
               </div>
             </div>
