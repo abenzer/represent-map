@@ -29,7 +29,7 @@ Installation
 Setup should be super easy. Follow these steps:
 
 1. Create a new MySQL database and user.
-2. Use phpMyAdmin or another MySQL utility to run the newest SQL file in the /db directory.
+2. Use phpMyAdmin or another MySQL utility to run the newest "places" SQL file in the /db directory.
 3. Open /include/db_example.php with your text editor. Enter your MySQL credentials in there. Also, replace "letsgetmappy" with a new password for the admin panel. Rename the file to "db.php".
 4. Upload all of the files to your server.
 5. Populate your database. We recommend seeding it with some existing data before opening it up to your local community.
@@ -37,9 +37,18 @@ Setup should be super easy. Follow these steps:
    query, note that you should leave the lat/long values blank when importing. Then, run geocode.php to automatically
    generate lat/long values for all your rows.
 6. You'll probably want to comb through index.php with your favorite text editor and replace all the RepresentLA content
-   (logo, "more info" text, etc.) with your own stuff.
-7. Challenge your newly-discovered neighbors to ping pong!
-8. Once visitors to your site have submitted their own markers, point your browser to /admin to approve/reject them.
+   (logo, "more info" text, Twitter/Facebook share buttons, etc.) with your own stuff.
+7. Once visitors to your site have submitted their own markers, point your browser to /admin to approve/reject them.
+8. Challenge your newly-discovered neighbors to ping pong!
+
+Optional. Show Eventbrite events on your map!
+
+1. Make sure you've configured your "db.php" with your Eventbrite API key and search parameters.
+2. Use phpMyAdmin or another MySQL utility to run the newest "events" SQL file in the /db directory.
+3. Run "events_get.php" in your browser anytime you want to get new events. By default, events
+   should be displayed on your map up to 1 month before their start date.
+4. If you want this script to run automatically (once a day would make sense), you can setup a
+   chron on your server. If you don't know how to do that, ask your hosting provider.
 
 
 License

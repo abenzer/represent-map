@@ -216,7 +216,32 @@ html, body, #map_canvas
 {
   float: right;
   padding: 10px;
+  height: 26px;
+  cursor: pointer;
 }
+.list .category .category_toggle.inactive
+{
+  opacity: .3;
+}
+.list .category .category_toggle.inactive:hover
+{
+  opacity: .6;
+}
+
+
+.list .category .category_toggle input
+{
+  display: none;
+}
+.list .category .category_toggle
+{
+  background-image: url("./images/icons/check.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 30px;
+}
+
+
 .list .list-items
 {
   display: none;
@@ -269,6 +294,7 @@ html, body, #map_canvas
 .marker_title
 {
   font-weight: bold;
+  max-width: 350px;
 }
 .marker_uri
 {

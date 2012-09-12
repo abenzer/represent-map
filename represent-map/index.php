@@ -8,9 +8,9 @@ include "header.php";
   <head>
     <!--
     This site was based on the Represent.LA project by:
-    - Alex Benzer
-    - Tara Tiger Brown
-    - Sean Bonner
+    - Alex Benzer (@abenzer)
+    - Tara Tiger Brown (@tara)
+    - Sean Bonner (@seanbonner)
     
     Create a map for your startup community!
     https://github.com/abenzer/represent-map
@@ -21,7 +21,7 @@ include "header.php";
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link href="./bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css" />
     <link href="./bootstrap/css/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="map.css" type="text/css" />
+    <link rel="stylesheet" href="map.css?nocache=289671982568" type="text/css" />
     <link rel="stylesheet" media="only screen and (max-device-width: 480px)" href="mobile.css" type="text/css" />
     <script src="./scripts/jquery-1.7.1.js" type="text/javascript" charset="utf-8"></script>
     <script src="./bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
@@ -72,23 +72,59 @@ include "header.php";
       function initialize() {
         // set map styles
         var mapStyles = [
-          {
-            featureType: "administrative.land_parcel",
+         {
+            featureType: "road",
+            elementType: "geometry",
             stylers: [
-              { visibility: "off" }
+              { hue: "#8800ff" },
+              { lightness: 100 }
+            ]
+          },{
+            featureType: "road",
+            stylers: [
+              { visibility: "on" },
+              { hue: "#91ff00" },
+              { saturation: -62 },
+              { gamma: 1.98 },
+              { lightness: 45 }
             ]
           },{
             featureType: "water",
             stylers: [
-              { visibility: "on" },
-              { saturation: 31 },
-              { lightness: 39 }
+              { hue: "#005eff" },
+              { gamma: 0.72 },
+              { lightness: 42 }
             ]
           },{
-            featureType: "road.highway",
+            featureType: "transit.line",
             stylers: [
-              { visibility: "simplified" },
-              { lightness: 18 }
+              { visibility: "off" }
+            ]
+          },{
+            featureType: "administrative.locality",
+            stylers: [
+              { visibility: "on" }
+            ]
+          },{
+            featureType: "administrative.neighborhood",
+            elementType: "geometry",
+            stylers: [
+              { visibility: "simplified" }
+            ]
+          },{
+            featureType: "landscape",
+            stylers: [
+              { visibility: "on" },
+              { gamma: 0.41 },
+              { lightness: 46 }
+            ]
+          },{
+            featureType: "administrative.neighborhood",
+            elementType: "labels.text",
+            stylers: [
+              { visibility: "on" },
+              { saturation: 33 },
+              { lightness: 20 }
             ]
           }
         ];
@@ -138,6 +174,7 @@ include "header.php";
               Array('investor', 'Investors'),
               Array('service', 'Consulting'),
               Array('hackerspace', 'Hackerspaces'),
+              Array('event', 'Events'),
               );
           $marker_id = 0;
           foreach($types as $type) {
@@ -156,6 +193,25 @@ include "header.php";
               $marker_id++;
             }
           }
+          if($show_events = true) {
+            $place[type] = "event";
+            $events = mysql_query("SELECT * FROM events WHERE start_date < ".(time()+4838400)." ORDER BY id DESC");
+            $events_total = mysql_num_rows($events);
+            while($event = mysql_fetch_assoc($events)) {
+              $event[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($event[title])));
+              $event[description] = htmlspecialchars_decode(addslashes(htmlspecialchars($event[description])));
+              $event[uri] = addslashes(htmlspecialchars($event[uri]));
+              $event[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($event[address])));
+              $event[start_date] = date("D, M j @ g:ia", $event[start_date]);
+              echo "
+                markers.push(['".$event[title]."', 'event', '".$event[lat]."', '".$event[lng]."', '".$event[start_date]."', '".$event[uri]."', '".$event[address]."']); 
+                markerTitles[".$marker_id."] = '".$event[title]."';
+              "; 
+              $count[$place[type]]++;
+              $marker_id++;
+            }
+          }
+
         ?>
 
         // add markers
@@ -267,7 +323,7 @@ include "header.php";
 
       // toggle (hide/show) markers of a given type (on the map)
       function toggle(type) {
-        if($("#filter_"+type).attr('checked') == "checked") {
+        if($('#filter_'+type).is('.inactive')) {
           show(type); 
         } else {
           hide(type); 
@@ -281,6 +337,7 @@ include "header.php";
             gmarkers[i].setVisible(false);
           }
         }
+        $("#filter_"+type).addClass("inactive");
       }
 
       // show all markers of a given type
@@ -290,6 +347,7 @@ include "header.php";
             gmarkers[i].setVisible(true);
           }
         }
+        $("#filter_"+type).removeClass("inactive");
       }
       
       // toggle (hide/show) marker list of a given type
@@ -366,24 +424,29 @@ include "header.php";
               Array('service', 'Consulting'),
               Array('hackerspace', 'Hackerspaces'),
               );
+          if($show_events == true) {
+            $types[] = Array('event', 'Events'); 
+          }
           $marker_id = 0;
           foreach($types as $type) {
-            $places = mysql_query("SELECT * FROM places WHERE approved='1' AND type='$type[0]' ORDER BY title");
-            $places_total = mysql_num_rows($places);
+            if($type[0] != "event") {
+              $markers = mysql_query("SELECT * FROM places WHERE approved='1' AND type='$type[0]' ORDER BY title");
+            } else {
+              $markers = mysql_query("SELECT * FROM events WHERE start_date < ".(time()+4838400)." ORDER BY id DESC");
+            }
+            $markers_total = mysql_num_rows($markers);
             echo "
               <li class='category'>
                 <div class='category_item'>
-                  <div class='category_toggle'>
-                    <input type='checkbox' id='filter_$type[0]' checked='checked' onClick=\"toggle('$type[0]')\" />
-                  </div>
-                  <a href='#' onClick=\"toggleList('$type[0]');\" class='category_info'><img src='./images/icons/$type[0].png' alt='' />$type[1]<span class='total'> ($places_total)</span></a>
+                  <div class='category_toggle' onClick=\"toggle('$type[0]')\" id='filter_$type[0]'></div>
+                  <a href='#' onClick=\"toggleList('$type[0]');\" class='category_info'><img src='./images/icons/$type[0].png' alt='' />$type[1]<span class='total'> ($markers_total)</span></a>
                 </div>
                 <ul class='list-items list-$type[0]'>
             ";
-            while($place = mysql_fetch_assoc($places)) {
+            while($marker = mysql_fetch_assoc($markers)) {
               echo "
-                  <li class='".$place[type]."'>
-                    <a href='#' onMouseOver=\"markerListMouseOver('".$marker_id."')\" onMouseOut=\"markerListMouseOut('".$marker_id."')\" onClick=\"goToMarker('".$marker_id."');\">".$place[title]."</a>
+                  <li class='".$marker[type]."'>
+                    <a href='#' onMouseOver=\"markerListMouseOver('".$marker_id."')\" onMouseOut=\"markerListMouseOut('".$marker_id."')\" onClick=\"goToMarker('".$marker_id."');\">".$marker[title]."</a>
                   </li>
               ";
               $marker_id++;
