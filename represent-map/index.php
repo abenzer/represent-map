@@ -300,7 +300,7 @@ include "header.php";
           source: markerTitles, 
           onselect: function(obj) {
             marker_id = jQuery.inArray(obj, markerTitles);
-            if(marker_id) {
+            if(marker_id > -1) {
               map.panTo(gmarkers[marker_id].getPosition());
               map.setZoom(15);
               google.maps.event.trigger(gmarkers[marker_id], 'click');
