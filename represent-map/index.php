@@ -192,7 +192,7 @@ include "header.php";
               $marker_id++;
             }
           }
-          if($show_events = true) {
+          if($show_events == true) {
             $place[type] = "event";
             $events = mysql_query("SELECT * FROM events WHERE start_date < ".(time()+4838400)." ORDER BY id DESC");
             $events_total = mysql_num_rows($events);
