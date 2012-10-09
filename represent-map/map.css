@@ -74,11 +74,13 @@ html, body, #map_canvas
 .topbar .left
 {
   overflow: hidden;
-  min-width: 700px;
+  min-width: 600px;
+  position: absolute;
 }
 .topbar .right
 {
   float: right;
+  padding: 3px 5px 0px 0px;
 }
 .topbar .logo
 {
@@ -108,7 +110,7 @@ html, body, #map_canvas
 .topbar .buttons .btn i
 {
   opacity: .5;
-  margin: -1px 4px 0px 0px;
+  margin: 0px 4px 0px 0px;
 }
 .topbar .buttons .btn:hover i
 {
@@ -151,19 +153,15 @@ html, body, #map_canvas
   float: left;
   line-height: 60px;
 }
-.topbar .search i
-{
-  opacity: .4;
-  margin-top: 1px;
-  margin-right: -25px;
-  margin-left: 10px;
-}
 .topbar .search input
 {
-  margin-top: 7px;
+  margin-top: 8px;
   width: 160px;
   font-size: 8pt;
-  padding: 4px 6px 3px 22px;
+  padding-left: 26px;
+  background-image: url("./images/icon-search.png");
+  background-position: 8px center;
+  background-repeat: no-repeat;
 }
 
 

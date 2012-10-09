@@ -405,7 +405,6 @@ include "header.php";
             <a href="#modal_add" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
           </div>
           <div class="search">
-            <i class="icon-search"></i>
             <input type="text" name="search" id="search" placeholder="Search for companies..." data-provide="typeahead" autocomplete="off" />
           </div>
         </div>
