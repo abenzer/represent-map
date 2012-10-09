@@ -423,7 +423,7 @@ include "header.php";
               Array('coworking', 'Coworking'), 
               Array('investor', 'Investors'),
               Array('service', 'Consulting'),
-              Array('hackerspace', 'Hackerspace')
+              Array('hackerspace', 'Hackerspaces')
               );
           if($show_events == true) {
             $types[] = Array('event', 'Events'); 
