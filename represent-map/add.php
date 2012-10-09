@@ -4,13 +4,6 @@ include "header.php";
 // This is used to submit new markers for review.
 // Markers won't appear on the map until they are approved.
 
-function parseInput($value) {
-  $value = htmlspecialchars($value);
-  $value = str_replace("\r", "", $value);
-  $value = str_replace("\n", "", $value);
-  return $value;
-}
-
 $owner_name = parseInput($_POST['owner_name']);
 $owner_email = parseInput($_POST['owner_email']);
 $title = parseInput($_POST['title']);

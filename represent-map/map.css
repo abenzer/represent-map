@@ -41,7 +41,7 @@ html, body, #map_canvas
 }
 
 
-/*  hide mobil menu */
+/*  hide mobile menu */
 .menu_mobile
 {
   display: none;
@@ -49,7 +49,125 @@ html, body, #map_canvas
 
 
 
-/* menubar */
+/* topbar nav */
+.topbar
+{
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  background-color: #fff;
+  width: 100%;
+  height: 60px;
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+  min-width: 850px;
+  background: #fcfcfc; /* Old browsers */
+  background: -moz-linear-gradient(top,  #ffffff 0%, #dddddd 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffffff), color-stop(100%,#dddddd)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #ffffff 0%,#dddddd 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #ffffff 0%,#dddddd 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #ffffff 0%,#dddddd 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #ffffff 0%,#dddddd 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#dddddd',GradientType=0 ); /* IE6-9 */
+}
+.topbar .left
+{
+  overflow: hidden;
+  min-width: 700px;
+}
+.topbar .right
+{
+  float: right;
+}
+.topbar .logo
+{
+  padding: 11px 10px 0px 20px;
+  float: left;
+  line-height: 60px;
+}
+.topbar .logo a
+{
+  display: inline-block;
+}
+.topbar .logo a img
+{
+  display: block;
+}
+.topbar .buttons
+{
+  float: left;
+  line-height: 60px;
+  margin: -1px 15px 0px 20px;
+}
+.topbar .buttons .btn
+{
+  font-size: 8pt;
+  padding: 6px 8px;
+}
+.topbar .buttons .btn i
+{
+  opacity: .5;
+  margin: -1px 4px 0px 0px;
+}
+.topbar .buttons .btn:hover i
+{
+  opacity: 1;
+}
+.topbar .attribution
+{
+  float: right;
+  line-height: 60px;
+  color: #777;
+  font-size: 11px;
+  font-weight: normal;
+  line-height: 130%;
+  padding: 13px 15px 0px 15px;
+}
+.topbar .attribution
+{
+  margin-right: 15px;
+}
+.topbar .share
+{
+  float: right;
+  line-height: 0px;
+  color: #777;
+  padding: 17px 10px 20px 10px;
+}
+.topbar .share div,
+.topbar .share iframe
+{
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 2px;
+}
+.topbar .share .btn
+{
+  text-shadow: none;
+}
+.topbar .search
+{
+  float: left;
+  line-height: 60px;
+}
+.topbar .search i
+{
+  opacity: .4;
+  margin-top: 1px;
+  margin-right: -25px;
+  margin-left: 10px;
+}
+.topbar .search input
+{
+  margin-top: 7px;
+  width: 160px;
+  font-size: 8pt;
+  padding: 4px 6px 3px 22px;
+}
+
+
+/* marker list, right-side gutter */
 .menu
 {
   position: absolute;
@@ -62,101 +180,34 @@ html, body, #map_canvas
   background-color: #fff;
   width: 250px;
 }
-.menu .wrapper
+.menu .blurb,
+.menu .attribution
 {
-  height: 320px;
-  border-left: 1px solid #ccc;
+  color: #999;
+  font-size: 8pt;
+  font-weight: normal;
+  line-height: 1.3em;
+  padding: 12px 10px 0px 10px;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
-.menu .logo
+.menu .blurb a,
+.menu .attribution a
 {
-  padding: 5px 10px 0px 10px;
+  color: #ccc;
 }
-.menu .logo a
+.menu .blurb a:hover,
+.menu .attribution a:hover
 {
-  display: inline-block;
-}
-.menu .logo a img
-{
-  display: block;
+  color: #fff;
 }
 .menu .blurb
 {
-  color: #777;
-  font-size: 11px;
-  font-weight: normal;
-  line-height: 130%;
-  padding: 5px 15px 0px 15px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
-.menu .buttons
+.menu .attribution
 {
-  padding: 10px 15px 5px 15px;
+  padding-bottom: 40px;
 }
-.menu .buttons .btn
-{
-  font-size: 8pt;
-  padding: 6px 8px;
-}
-.menu .share
-{
-  color: #777;
-  line-height: 0px;
-  padding: 5px 15px 5px 15px;
-}
-.menu .share div,
-.menu .share iframe
-{
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 2px;
-}
-.menu .share .btn
-{
-  text-shadow: none;
-}
-.menu .filters
-{
-  margin: 15px 0px;
-}
-.menu .filters li + li
-{
-  margin-top: 10px;
-}
-.menu .filters li input,
-.menu .filters li label
-{
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 1em;
-  font-size: 14px;
-}
-.menu .filters li label
-{
-  margin-bottom: 0px;
-  padding: 5px 0px;
-  cursor: pointer;
-  -moz-user-select: none;
-  -webkit-user-select: none;
-}
-.menu .filters li label span
-{
-  color: #999;
-}
-.menu .filters li .icon
-{
-  width: 22px;
-  margin-right: 1px;
-}
-.menu .search
-{
-  padding: 10px 0px 10px 15px;
-}
-.menu .search input
-{
-  margin-top: 5px;
-  width: 200px;
-  font-size: 8pt;
-}
-
 
 
 
@@ -169,7 +220,7 @@ html, body, #map_canvas
   height: 100px;
   border-left: 1px solid #ccc;
   border-top: 1px solid #ccc;
-  overflow-y: auto;
+  overflow-y: scroll;
   height: 100px;
   background-color: #333;
 }
@@ -186,9 +237,8 @@ html, body, #map_canvas
 .list .category
 {
   font-size: 11pt;
-  background-color: #282828;
   color: #eee;
-  border-bottom: 1px solid rgba(255,255,255,.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 .list .category img
@@ -199,18 +249,28 @@ html, body, #map_canvas
 {
   opacity: .5;
 }
+.list .category .category_item
+{
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.list .category .category_item:hover
+{
+  background-color: rgba(255,255,255,.03);
+}
 .list .category .category_info
 {
   display: block;
   overflow: hidden;
   padding: 3px 6px;
   color: #eee;
-  background-color: #333;
 }
 .list .category .category_info:hover 
 {
-  background-color: #383838;
   text-decoration: none;
+}
+.list .category .category_info:focus
+{
+  outline: none;
 }
 .list .category .category_toggle
 {
@@ -221,14 +281,12 @@ html, body, #map_canvas
 }
 .list .category .category_toggle.inactive
 {
-  opacity: .3;
+  opacity: .15;
 }
 .list .category .category_toggle.inactive:hover
 {
-  opacity: .6;
+  opacity: .5;
 }
-
-
 .list .category .category_toggle input
 {
   display: none;
@@ -240,15 +298,13 @@ html, body, #map_canvas
   background-repeat: no-repeat;
   width: 30px;
 }
-
-
 .list .list-items
 {
   display: none;
 }
 .list .list-items li
 {
-  border-bottom: 1px solid #eaeaea;
+  border-top: 1px solid rgba(255,255,255,.03);
 }
 .list .list-items li a
 {
@@ -256,17 +312,16 @@ html, body, #map_canvas
   font-size: 8pt;
   padding: 5px 10px;
   outline: none;
-  color: #555;
+  color: #ccc;
   font-weight: normal;
-  background-color: #f5f5f5;
   line-height: 1.4em; 
 }
 .list .list-items li a:hover
 {
-  background-color: #fff;
+  background-color: rgba(255,255,255,.03);
   text-decoration: none;
   outline: none;
-  color: #444;
+  color: #fff;
 }
 .list .list-items li a:active
 {

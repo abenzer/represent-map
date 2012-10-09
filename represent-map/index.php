@@ -36,7 +36,7 @@ include "header.php";
       var markerTitles =[];
       var highestZIndex = 0;  
       var agent = "default";
-      var zoomControl = true;
+      var zoomControl = false;
 
 
       // detect browser agent
@@ -54,8 +54,7 @@ include "header.php";
 
       // resize marker list onload/resize
       $(document).ready(function(){
-        newHeight = $('html').height() - $('#menu > .wrapper').height();
-        $('#list').css('height', newHeight + "px"); 
+        resizeList() 
       });
       $(window).resize(function() {
         resizeList();
@@ -63,8 +62,9 @@ include "header.php";
       
       // resize marker list to fit window
       function resizeList() {
-        newHeight = $('html').height() - $('#menu > .wrapper').height();
+        newHeight = $('html').height() - $('#topbar').height();
         $('#list').css('height', newHeight + "px"); 
+        $('#menu').css('margin-top', $('#topbar').height()); 
       }
 
 
@@ -131,7 +131,7 @@ include "header.php";
 
         // set map options
         var myOptions = {
-          zoom: 12,
+          zoom: 11,
           //minZoom: 10,
           center: new google.maps.LatLng(34.034453,-118.341293),
           mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -173,6 +173,7 @@ include "header.php";
               Array('coworking', 'Coworking'), 
               Array('investor', 'Investors'),
               Array('service', 'Consulting'),
+              Array('hackerspace', 'Hackerspaces'),
               Array('event', 'Events'),
               );
           $marker_id = 0;
@@ -192,7 +193,7 @@ include "header.php";
               $marker_id++;
             }
           }
-          if($show_events = true) {
+          if($show_events == true) {
             $place[type] = "event";
             $events = mysql_query("SELECT * FROM events WHERE start_date < ".(time()+4838400)." ORDER BY id DESC");
             $events_total = mysql_num_rows($events);
@@ -300,7 +301,7 @@ include "header.php";
           source: markerTitles, 
           onselect: function(obj) {
             marker_id = jQuery.inArray(obj, markerTitles);
-            if(marker_id) {
+            if(marker_id > -1) {
               map.panTo(gmarkers[marker_id].getPosition());
               map.setZoom(15);
               google.maps.event.trigger(gmarkers[marker_id], 'click');
@@ -383,35 +384,36 @@ include "header.php";
     <!-- google map -->
     <div id="map_canvas"></div>
     
-    <!-- main menu bar -->
-    <div class="menu" id="menu">
+    <!-- topbar -->
+    <div class="topbar" id="topbar">
       <div class="wrapper">
-        <div class="logo">
-          <a href="./">
-            <img src="images/logo.png" alt="" />
-          </a>
+        <div class="right">
+          <div class="share">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.represent.la" data-text="Let's put Los Angeles startups on the map:" data-via="representla" data-count="none">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+            <div class="fb-like" data-href="http://www.represent.la" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
+          </div>
         </div>
-        <div class="blurb">
-          This map was made to connect and promote the Los Angeles tech startup community.
-          Let's put LA on the map!
-        </div>
-        <div class="buttons">
-          <a href="#modal_info" class="btn btn-large btn-info" data-toggle="modal">More Info</a>
-          <a href="#modal_add" class="btn btn-large btn-inverse" data-toggle="modal">Add Something!</a>
-        </div>
-        <div class="share">
-          <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.represent.la" data-text="Let's put Los Angeles startups on the map:" data-via="representla" data-count="none">Tweet</a>
-          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-          <div class="fb-like" data-href="http://www.represent.la" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
-        </div>
-        <div class="blurb">
-          <!-- per our license, you may not remove this line -->
-          <?=$attribution?>
-        </div>
-        <div class="search">
-          <input type="text" name="search" id="search" placeholder="Type a company name..." data-provide="typeahead" autocomplete="off" />
+        <div class="left">
+          <div class="logo">
+            <a href="./">
+              <img src="images/logo.png" alt="" />
+            </a>
+          </div>
+          <div class="buttons">
+            <a href="#modal_info" class="btn btn-large btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i>About this Map</a>
+            <a href="#modal_add" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
+          </div>
+          <div class="search">
+            <i class="icon-search"></i>
+            <input type="text" name="search" id="search" placeholder="Search for companies..." data-provide="typeahead" autocomplete="off" />
+          </div>
         </div>
       </div>
+    </div>
+    
+    <!-- right-side gutter -->
+    <div class="menu" id="menu">
       <ul class="list" id="list">
         <?php
           $types = Array(
@@ -420,7 +422,8 @@ include "header.php";
               Array('incubator', 'Incubators'), 
               Array('coworking', 'Coworking'), 
               Array('investor', 'Investors'),
-              Array('service', 'Consulting')
+              Array('service', 'Consulting'),
+              Array('hackerspace', 'Hackerspace')
               );
           if($show_events == true) {
             $types[] = Array('event', 'Events'); 
@@ -430,7 +433,7 @@ include "header.php";
             if($type[0] != "event") {
               $markers = mysql_query("SELECT * FROM places WHERE approved='1' AND type='$type[0]' ORDER BY title");
             } else {
-              $markers = mysql_query("SELECT * FROM events WHERE start_date < ".(time()+4838400)." ORDER BY id DESC");
+              $markers = mysql_query("SELECT * FROM events WHERE start_date > ".time()." AND start_date < ".(time()+4838400)." ORDER BY id DESC");
             }
             $markers_total = mysql_num_rows($markers);
             echo "
@@ -450,12 +453,22 @@ include "header.php";
               $marker_id++;
             }
             echo "
-                </li>
-              </ul>
+                </ul>
+              </li>
             ";
           }
         ?>
+        <li class="blurb">
+          This map was made to connect and promote the Los Angeles tech startup community.
+          Let's put LA on the map!
+        </li>
+        <li class="attribution">
+          <!-- per our license, you may not remove this line -->
+          <?=$attribution?>
+        </li>
       </ul>
+
+      
     </div>
     
     
@@ -479,7 +492,7 @@ include "header.php";
     <div class="modal hide" id="modal_info">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">×</button>
-        <h3>About This Map</h3>
+        <h3>About this Map</h3>
       </div>
       <div class="modal-body">
         <p>
@@ -513,7 +526,7 @@ include "header.php";
         <p>
           This map was built with <a href="https://github.com/abenzer/represent-map">RepresentMap</a> - an open source project we started
           to help startup communities around the world create their own maps. 
-          Check out some <a target="_blank" href="http://www.represent.la/and-other-cities">startup maps</a> built by other communities!
+          Check out some <a target="_blank" href="http://www.representmap.com">startup maps</a> built by other communities!
         </p>
       </div>
       <div class="modal-footer">
@@ -564,6 +577,7 @@ include "header.php";
                   <option value="coworking">Coworking</option>
                   <option value="investor">VC/Angel</option>
                   <option value="service">Consulting Firm</option>
+                  <option value="hackerspace">Hackerspace</option>
                 </select>
               </div>
             </div>
@@ -593,6 +607,14 @@ include "header.php";
                 <p class="help-block">
                   Brief, concise description. What's your product? What problem do you solve? Max 150 chars.
                 </p>
+              </div>
+            </div>
+            <div class="control-group">
+              <label class="control-label" for="add_description">Market</label>
+              <div class="controls">
+                <select name="type" id="add_type" class="input-xlarge">
+                  <option value="startup">Startup</option>
+                </select>
               </div>
             </div>
           </fieldset>

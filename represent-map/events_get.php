@@ -53,9 +53,9 @@ function getEventbriteEvents($eb_keywords, $eb_city, $eb_proximity) {
                                       address
                                       ) VALUES (
                                       '$event->id',
-                                      '".htmlspecialchars($event_title, ENT_QUOTES)."',
+                                      '".parseInput($event_title)."',
                                       '".strtotime($event->created)."',
-                                      '".trim(htmlspecialchars($event->organizer->name, ENT_QUOTES))."',
+                                      '".trim(parseInput($event->organizer->name))."',
                                       '$event_organizer_url',
                                       '".strtotime($event->start_date)."',
                                       '".strtotime($event->end_date)."',
