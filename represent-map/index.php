@@ -1,6 +1,5 @@
 <?php
-include "header.php";
-
+include_once "header.php";
 ?>
 
 <!DOCTYPE html>
@@ -563,7 +562,7 @@ include "header.php";
             <div class="control-group">
               <label class="control-label" for="add_title">Company Name</label>
               <div class="controls">
-                <input type="text" class="input-xlarge" name="title" id="add_title" maxlength="100">
+                <input type="text" class="input-xlarge" name="title" id="add_title" maxlength="100" autocomplete="off">
               </div>
             </div>
             <div class="control-group">
@@ -606,14 +605,6 @@ include "header.php";
                 <p class="help-block">
                   Brief, concise description. What's your product? What problem do you solve? Max 150 chars.
                 </p>
-              </div>
-            </div>
-            <div class="control-group">
-              <label class="control-label" for="add_description">Market</label>
-              <div class="controls">
-                <select name="type" id="add_type" class="input-xlarge">
-                  <option value="startup">Startup</option>
-                </select>
               </div>
             </div>
           </fieldset>

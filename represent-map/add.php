@@ -1,5 +1,5 @@
 <?php
-include "header.php";
+include_once "header.php";
 
 // This is used to submit new markers for review.
 // Markers won't appear on the map until they are approved.

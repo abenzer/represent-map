@@ -1,5 +1,5 @@
 <?php
-include "header.php";
+include_once "header.php";
 
 // Run this script after new markers have been added to the DB.
 // It will look for any markers that are missing latlong values
