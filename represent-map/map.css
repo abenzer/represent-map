@@ -472,3 +472,34 @@ html, body, #map_canvas
   margin: 10px;
 }
 
+
+/* choose submission method modal (only visible if Startup Genome integration is enabled) */
+#modal_add_choose ul li em
+{
+  display: block;
+  font-weight: bold;
+  font-style: normal;
+  margin-bottom: .5em;
+}
+#modal_add_choose ul li
+{
+  margin-top: 25px;
+}
+
+
+
+/* error overlay */
+.error
+{
+  position: absolute;
+  color: #ff0000;
+  font-weight: bold;
+  background-color: rgba(255,255,255,.7);
+  font-size: 11pt;
+  z-index: 9999999999;
+  top: 80px;
+  left: 20px;
+  padding: .7em 1em;
+  border-radius: 7px;
+  border: 2px dashed rgba(255,0,0,.6);
+}

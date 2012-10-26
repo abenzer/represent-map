@@ -35,7 +35,7 @@ include_once "header.php";
       var markerTitles =[];
       var highestZIndex = 0;  
       var agent = "default";
-      var zoomControl = true;
+      var zoomControl = false;
 
 
       // detect browser agent
@@ -134,14 +134,14 @@ include_once "header.php";
           //minZoom: 10,
           center: new google.maps.LatLng(34.034453,-118.341293),
           mapTypeId: google.maps.MapTypeId.ROADMAP,
+          panControl: false,
           streetViewControl: false,
           mapTypeControl: false,
-          panControl: false,
           zoomControl: zoomControl,
           styles: mapStyles,
           zoomControlOptions: {
             style: google.maps.ZoomControlStyle.SMALL,
-            position: google.maps.ControlPosition.LEFT_CENTER
+            position: google.maps.ControlPosition.TOP_LEFT
           }
         };
         map = new google.maps.Map(document.getElementById('map_canvas'), myOptions);
@@ -165,6 +165,7 @@ include_once "header.php";
         // markers array: name, type (icon), lat, long, description, uri, address
         markers = new Array();
         <?php
+        
           $types = Array(
               Array('startup', 'Startups'),
               Array('accelerator','Accelerators'),
@@ -194,7 +195,7 @@ include_once "header.php";
           } 
           if($show_events == true) {
             $place[type] = "event";
-            $events = mysql_query("SELECT * FROM events WHERE start_date > ".time()." AND start_date < ".(time()+4838400)." ORDER BY id DESC");
+            $events = mysql_query("SELECT * FROM events WHERE start_date < ".(time()+2629746)." ORDER BY id DESC");
             $events_total = mysql_num_rows($events);
             while($event = mysql_fetch_assoc($events)) {
               $event[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($event[title])));
@@ -403,7 +404,7 @@ include_once "header.php";
           </div>
           <div class="buttons">
             <a href="#modal_info" class="btn btn-large btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i>About this Map</a>
-            <?php if($sg_enabled) { ?>
+            <?php if($data_source == "startupgenome") { ?>
               <a href="#modal_add_choose" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
             <? } else { ?>
               <a href="#modal_add" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
@@ -420,47 +421,99 @@ include_once "header.php";
     <div class="menu" id="menu">
       <ul class="list" id="list">
         <?php
-          $types = Array(
-              Array('startup', 'Startups'),
-              Array('accelerator','Accelerators'),
-              Array('incubator', 'Incubators'), 
-              Array('coworking', 'Coworking'), 
-              Array('investor', 'Investors'),
-              Array('service', 'Consulting'),
-              Array('hackerspace', 'Hackerspaces')
-              );
-          if($show_events == true) {
-            $types[] = Array('event', 'Events'); 
-          }
-          $marker_id = 0;
-          foreach($types as $type) {
-            if($type[0] != "event") {
-              $markers = mysql_query("SELECT * FROM places WHERE approved='1' AND type='$type[0]' ORDER BY title");
-            } else {
-              $markers = mysql_query("SELECT * FROM events WHERE start_date > ".time()." AND start_date < ".(time()+4838400)." ORDER BY id DESC");
+        
+        
+        
+        
+          // if startup genome mode enabled, get marker list from there
+          if($data_source == "startupgenome") {
+            
+            $types = Array(
+              'startup'=>'Startups',
+              'accelerator'=>'Accelerators',
+              'incubator'=> 'Incubators',
+              'coworking'=> 'Coworking',
+              'investor'=> 'Investors',
+              'service'=> 'Consulting'
+            );
+            if($show_events == true) {
+            // $types[] = Array('event', 'Events');
             }
-            $markers_total = mysql_num_rows($markers);
-            echo "
-              <li class='category'>
-                <div class='category_item'>
-                  <div class='category_toggle' onClick=\"toggle('$type[0]')\" id='filter_$type[0]'></div>
-                  <a href='#' onClick=\"toggleList('$type[0]');\" class='category_info'><img src='./images/icons/$type[0].png' alt='' />$type[1]<span class='total'> ($markers_total)</span></a>
-                </div>
-                <ul class='list-items list-$type[0]'>
-            ";
-            while($marker = mysql_fetch_assoc($markers)) {
-              echo "
-                  <li class='".$marker[type]."'>
-                    <a href='#' onMouseOver=\"markerListMouseOver('".$marker_id."')\" onMouseOut=\"markerListMouseOut('".$marker_id."')\" onClick=\"goToMarker('".$marker_id."');\">".$marker[title]."</a>
-                  </li>
+            $marker_id = 0;
+            foreach($types_arr as $key => $place_arr) {
+                          $markers_total = count($place_arr);
+
+                          echo "
+                <li class='category'>
+                  <div class='category_item'>
+                    <div class='category_toggle' onClick=\"toggle('$key')\" id='filter_$key'></div>
+                    <a href='#' onClick=\"toggleList('$key');\" class='category_info'><img src='./images/icons/$key.png' alt='' />".$types[$key]."<span class='total'> ($markers_total)</span></a>
+                  </div>
+                  <ul class='list-items list-$key'>
               ";
-              $marker_id++;
-            }
-            echo "
+
+              foreach($place_arr as $key=>$marker) {
+                echo "
+                    <li class='".$marker[type]."'>
+                      <a href='#' onMouseOver=\"markerListMouseOver('".$marker['marker_id']."')\" onMouseOut=\"markerListMouseOut('".$marker['marker_id']."')\" onClick=\"goToMarker('".$marker['marker_id']."');\">".stripslashes($marker[title])."</a>
+                    </li>
+                ";
+                $marker_id++;
+              }
+              echo "
+                  </li>
                 </ul>
-              </li>
-            ";
+              ";
+            }
+            
+          // else, get it from the local db
+          } else {
+
+            $types = Array(
+                Array('startup', 'Startups'),
+                Array('accelerator','Accelerators'),
+                Array('incubator', 'Incubators'), 
+                Array('coworking', 'Coworking'), 
+                Array('investor', 'Investors'),
+                Array('service', 'Consulting'),
+                Array('hackerspace', 'Hackerspaces')
+                );
+            if($show_events == true) {
+              $types[] = Array('event', 'Events'); 
+            }
+            $marker_id = 0;
+            foreach($types as $type) {
+              if($type[0] != "event") {
+                $markers = mysql_query("SELECT * FROM places WHERE approved='1' AND type='$type[0]' ORDER BY title");
+              } else {
+                $markers = mysql_query("SELECT * FROM events WHERE start_date > ".time()." AND start_date < ".(time()+4838400)." ORDER BY id DESC");
+              }
+              $markers_total = mysql_num_rows($markers);
+              echo "
+                <li class='category'>
+                  <div class='category_item'>
+                    <div class='category_toggle' onClick=\"toggle('$type[0]')\" id='filter_$type[0]'></div>
+                    <a href='#' onClick=\"toggleList('$type[0]');\" class='category_info'><img src='./images/icons/$type[0].png' alt='' />$type[1]<span class='total'> ($markers_total)</span></a>
+                  </div>
+                  <ul class='list-items list-$type[0]'>
+              ";
+              while($marker = mysql_fetch_assoc($markers)) {
+                echo "
+                    <li class='".$marker[type]."'>
+                      <a href='#' onMouseOver=\"markerListMouseOver('".$marker_id."')\" onMouseOut=\"markerListMouseOut('".$marker_id."')\" onClick=\"goToMarker('".$marker_id."');\">".$marker[title]."</a>
+                    </li>
+                ";
+                $marker_id++;
+              }
+              echo "
+                  </ul>
+                </li>
+              ";
+            }
+            
           }
+            
+          
         ?>
         <li class="blurb">
           This map was made to connect and promote the Los Angeles tech startup community.
@@ -471,7 +524,26 @@ include_once "header.php";
           <?=$attribution?>
         </li>
       </ul>
+
+      
     </div>
+    
+    
+    <!-- main menu bar (mobile) -->
+    <div class="menu_mobile">
+      <div class="wrapper">
+        <div class="buttons">
+          <a href="#modal_add" class="btn btn-large btn-inverse" data-toggle="modal">Add</a>
+          <a href="#modal_info" class="btn btn-large" data-toggle="modal">Info</a>
+        </div>
+        <div class="logo">
+          <a href="http://represent.la/">
+            <img src="images/logo.png" alt="RepresentLA" />
+          </a>
+        </div>
+      </div>
+    </div>
+    
     
     <!-- more info modal -->
     <div class="modal hide" id="modal_info">
@@ -528,6 +600,10 @@ include_once "header.php";
           <h3>Add something!</h3>
         </div>
         <div class="modal-body">
+          <p>
+            Want to add your company to this map?
+            Submit it below and we'll review it ASAP.
+          </p>
           <div id="result"></div>
           <fieldset>
             <div class="control-group">
@@ -645,27 +721,27 @@ include_once "header.php";
         </div>
         <div class="modal-body">
           <p>
-            Want to add your company to this map? There are two easy ways to do that.
+            Want to add your company to this map?
+            There are two easy ways to do that.
           </p>
           <ul>
             <li>
               <em>Option #1: Add your company to Startup Genome</em>
-              <div>
-                Our map pulls its data from <a href="http://www.startupgenome.com">Startup Genome</a>.
-                When you add your company to Startup Genome, it will appear on this map after it has been approved.
-                You will be able to change your company's information anytime you want from the Startup Genome website.
-              </div>
-              <br />
+              <p>
+                Our map pulls its data from Startup Genome. When you add your company
+                on Startup Genome, it will automatically appear on this map.
+                You'll be able to change your company's information anytime you want
+                from the Startup Genome website.
+              </p>
               <a href="http://www.startupgenome.com" target="_blank" class="btn btn-info">Sign in to Startup Genome</a>
             </li>
             <li>
               <em>Option #2: Add your company manually</em>
-              <div>
-                If you don't want to sign up for Startup Genome, you can still add your company to this map.
-                We will review your submission as soon as possible.
-              </div>
-              <br />
-          <a href="#modal_add" target="_blank" class="btn btn-info" data-toggle="modal" data-dismiss="modal">Submit your company manually</a>
+              <p>
+                If you don't want to register for Startup Genome, you can still add
+                your company to the map, and we'll review your submission as soon as possible.
+              </p>
+              <a href="#modal_add" target="_blank" class="btn btn-info" data-dismiss="modal" data-toggle="modal">Submit your company manually</a>
             </li>
           </ul>
         </div>

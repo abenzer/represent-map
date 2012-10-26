@@ -1,61 +1,17 @@
 
 /* 
-these styles are only loaded on mobile devices 
+these styles are only used on mobile devices 
 */
 
 body
 {
   width: auto;
+  font-size: 1em;
 }
-
 .menu
 {
   display: none;
 }
-.menu_mobile
-{
-  display: block;
-  position: absolute;
-  z-index: 2;
-  font-size: 20px;
-  width: 100%;
-  font-weight: bold;
-  left: 0;
-  top: 0;
-  background-color: rgba(255,255,255,.8);
-  border-bottom: 1px solid #aaa;
-}
-.menu_mobile .wrapper
-{
-  overflow: hidden;
-  padding: 5px 10px;
-}
-.menu_mobile .search
-{
-  display: none;
-}
-.menu_mobile .logo
-{
-  float: left;
-  overflow: hidden;
-}
-.menu_mobile .buttons
-{
-  float: right;
-  overflow: hidden;
-}
-.menu_mobile .logo img
-{
-  width: 35px;
-}
-.menu_mobile .btn
-{
-  display: inline-block;
-  font-size: 11px;
-  font-weight: bold;
-  padding: 8px 12px;
-}
-
 #modal_info,
 #modal_add
 {
@@ -63,13 +19,39 @@ body
   margin: 10px 0px;
   top: 0;
 }
+#topbar
+{
+  width: 100%;
+  height: auto;
+}
+#topbar .logo,
+#topbar .search,
+#topbar .right
+{
+  display: none;
+}
+#topbar .btn
+{
+  font-size: .7em;
+  padding: .5em .75em;
+}
+#topbar .buttons
+{
+  float: none;
+  line-height: normal;
+  padding: .5em;
+  margin: 0px;
+}
+#topbar .left
+{
+  position: static;
+}
 
 
 /* landscape styles */
 @media screen and (orientation:landscape) {
-  .menu_mobile
+  #topbar
   {
     display: none;
   }
 }
-
