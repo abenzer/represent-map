@@ -483,8 +483,12 @@ include_once "header.php";
         <p>
           We built this map to connect and promote the tech startup community
           in our beloved Los Angeles. We've seeded the map but we need
-          your help to keep it fresh. If you don't see your company,
-          please <a href="#modal_add" data-toggle="modal" data-dismiss="modal">submit it here</a>.
+          your help to keep it fresh. If you don't see your company, please 
+          <?php if($sg_enabled) { ?>
+            <a href="#modal_add_choose" data-toggle="modal" data-dismiss="modal">submit it here</a>.
+          <?php } else { ?>
+            <a href="#modal_add" data-toggle="modal" data-dismiss="modal">submit it here</a>.
+          <?php } ?>
           Let's put LA on the map together!
         </p>
         <p>
