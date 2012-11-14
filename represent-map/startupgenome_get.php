@@ -44,23 +44,23 @@ if(mysql_num_rows($interval_query) == 1) {
           $place['categories'][0]['parent_category_id'] = $place['categories'][0]['category_id'];
         switch ($place['categories'][0]['parent_category_id']) {
           default:
-          case '2': $place[type] = 'startup'; break;
-          case '3': $place[type] = 'investor'; break;
-          case '4': $place[type] = 'accelerator'; break;
-          case '5': $place[type] = 'incubator'; break;
-          case '6': $place[type] = 'coworking'; break;
+          case '2': $place['type'] = 'startup'; break;
+          case '3': $place['type'] = 'investor'; break;
+          case '4': $place['type'] = 'accelerator'; break;
+          case '5': $place['type'] = 'incubator'; break;
+          case '6': $place['type'] = 'coworking'; break;
         }
         
         // format the address for display
-        $place[address] = $place['address1'];
-        $place[address] .= ($place['address2']?($place[address]?', ':'').$place['address2']:'');
-        $place[address] .= ($place['city']?($place[address]?', ':'').$place['city']:'');
-        $place[address] .= ($place['state']?($place[address]?', ':'').(isset($states_arr[$place['state']])?$states_arr[$place['state']]:$place['state']):'');
-        $place[address] .= ($place['zip']?($place[address]?', ':'').$place['zip']:'');
-        $place[address] .= ($place['country']?($place[address]?', ':'').(isset($countries_arr[$place['country']])?$countries_arr[$place['country']]:$place['country']):'');
-        $types_arr[$place[type]][] = $place;
+        $place['address'] = $place['address1'];
+        $place['address'] .= ($place['address2']?($place['address']?', ':'').$place['address2']:'');
+        $place['address'] .= ($place['city']?($place['address']?', ':'').$place['city']:'');
+        $place['address'] .= ($place['state']?($place['address']?', ':'').(isset($states_arr[$place['state']])?$states_arr[$place['state']]:$place['state']):'');
+        $place['address'] .= ($place['zip']?($place['address']?', ':'').$place['zip']:'');
+        $place['address'] .= ($place['country']?($place['address']?', ':'').(isset($countries_arr[$place['country']])?$countries_arr[$place['country']]:$place['country']):'');
+        $types_arr[$place['type']][] = $place;
         $org_array[] = $place['organization_id'];
-        $count[$place[type]]++;
+        $count[$place['type']]++;
         $marker_id++;
 
         $place_query = mysql_query("SELECT id FROM places WHERE sg_organization_id='".$place['organization_id']."' LIMIT 1") or die(mysql_error());

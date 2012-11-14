@@ -14,6 +14,8 @@ if(isset($_GET['p'])) { $p = $_GET['p']; }
 else if(isset($_POST['p'])) { $p = $_POST['p']; }
 else { $p = 1; }
 
+$page = array_key_exists('page', $_GET) ? $_GET['page'] : null;
+
 // get search
 if(isset($_GET['search'])) { $search = $_GET['search']; } 
 else if(isset($_POST['search'])) { $search = $_POST['search']; }
@@ -45,8 +47,8 @@ $admin_head = "
     <link href='../bootstrap/css/bootstrap.css' rel='stylesheet' type='text/css' />
     <link href='../bootstrap/css/bootstrap-responsive.css' rel='stylesheet' type='text/css' />
     <link rel='stylesheet' href='admin.css' type='text/css' />
-    <script src='../bootstrap/js/bootstrap.js' type='text/javascript' charset='utf-8'></script>
     <script src='../scripts/jquery-1.7.1.js' type='text/javascript' charset='utf-8'></script>
+    <script src='../bootstrap/js/bootstrap.js' type='text/javascript' charset='utf-8'></script>
   </head>
   <body>
 ";

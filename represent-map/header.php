@@ -1,4 +1,5 @@
 <?php
+extract($_REQUEST);
 include "./include/db.php";
 
 // connect to db
@@ -19,6 +20,6 @@ function parseInput($value) {
   return $value;
 }
 
-
+$error = null;
 
 ?>
