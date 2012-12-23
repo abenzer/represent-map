@@ -25,9 +25,5 @@
       $marker_id++;
     }
   }
-
-  //var_dump($markers);
-  //echo "<br><br>";
-  //$to_json = json_encode($markers);
   echo(json_encode($markers));
 ?>
