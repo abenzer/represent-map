@@ -6,8 +6,7 @@ include_once "header.php";
 // and automatically geocode them.
 
 // google maps vars
-define("MAPS_HOST", "maps.google.com");
-define("KEY", "abcdefg");
+define("MAPS_HOST", "maps.googleapis.com");
 
 // geocode all markers
 geocode("places");
@@ -25,7 +24,7 @@ function geocode($table) {
 
   // geocode and save them back to the db
   $delay = 0;
-  $base_url = "http://" . MAPS_HOST . "/maps/geo?output=xml" . "&key=" . KEY;
+  $base_url = "http://" . MAPS_HOST . "/maps/api/geocode/xml";
 
   // Iterate through the rows, geocoding each address
   while ($row = @mysql_fetch_assoc($result)) {
@@ -34,18 +33,17 @@ function geocode($table) {
     while ($geocode_pending) {
       $address = $row["address"];
       $id = $row["id"];
-      $request_url = $base_url . "&q=" . urlencode($address);
+      $request_url = $base_url . "?address=" . urlencode($address) . "&sensor=false";
       $xml = simplexml_load_file($request_url) or die("url not loading");
-
-      $status = $xml->Response->Status->code;
-      if (strcmp($status, "200") == 0) {
+      
+      $status = $xml->status;
+      if ($status == "OK") {
         // Successful geocode
         $geocode_pending = false;
-        $coordinates = $xml->Response->Placemark->Point->coordinates;
-        $coordinatesSplit = mb_split(",", $coordinates);
+        $coordinates = $xml->result->geometry->location;
         // Format: Longitude, Latitude, Altitude
-        $lat = $coordinatesSplit[1];
-        $lng = $coordinatesSplit[0];
+        $lat = $coordinates->lat;
+        $lng = $coordinates->lng;
 
         $query = sprintf("UPDATE $table " .
               " SET lat = '%s', lng = '%s' " .
