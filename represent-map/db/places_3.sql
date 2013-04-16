@@ -14,5 +14,5 @@ CREATE TABLE IF NOT EXISTS `places` (
   `sg_organization_id` int(9) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci; 
 
