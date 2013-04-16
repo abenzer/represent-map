@@ -1,6 +1,7 @@
 <?php
 include "header.php";
 
+$task = array_key_exists('task', $_GET) ? $_GET['task'] : null;
 
 if(isset($_GET['place_id'])) {
   $place_id = htmlspecialchars($_GET['place_id']); 
@@ -42,7 +43,7 @@ if($task == "doedit") {
 
 
 
-<? echo $admin_head; ?>
+<?php echo $admin_head; ?>
 
 <form id="admin" class="form-horizontal" action="edit.php" method="post">
   <h1>
@@ -52,60 +53,60 @@ if($task == "doedit") {
     <div class="control-group">
       <label class="control-label" for="">Title</label>
       <div class="controls">
-        <input type="text" class="input input-xlarge" name="title" value="<?=$place[title]?>" id="">
+        <input type="text" class="input input-xlarge" name="title" value="<?php echo $place['title']; ?>" id="">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="">Type</label>
       <div class="controls">
         <select class="input input-xlarge" name="type">
-          <option<? if($place[type] == "startup") {?> selected="selected"<? } ?>>startup</option>
-          <option<? if($place[type] == "accelerator") {?> selected="selected"<? } ?>>accelerator</option>
-          <option<? if($place[type] == "incubator") {?> selected="selected"<? } ?>>incubator</option>
-          <option<? if($place[type] == "coworking") {?> selected="selected"<? } ?>>coworking</option>
-          <option<? if($place[type] == "investor") {?> selected="selected"<? } ?>>investor</option>
-          <option<? if($place[type] == "service") {?> selected="selected"<? } ?>>service</option>
-          <option<? if($place[type] == "hackerspace") {?> selected="selected"<? } ?>>hackerspace</option>
+          <option<?php if($place['type'] == "startup") {?> selected="selected"<?php } ?>>startup</option>
+          <option<?php if($place['type'] == "accelerator") {?> selected="selected"<?php } ?>>accelerator</option>
+          <option<?php if($place['type'] == "incubator") {?> selected="selected"<?php } ?>>incubator</option>
+          <option<?php if($place['type'] == "coworking") {?> selected="selected"<?php } ?>>coworking</option>
+          <option<?php if($place['type'] == "investor") {?> selected="selected"<?php } ?>>investor</option>
+          <option<?php if($place['type'] == "service") {?> selected="selected"<?php } ?>>service</option>
+          <option<?php if($place['type'] == "hackerspace") {?> selected="selected"<?php } ?>>hackerspace</option>
         </select>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="">Address</label>
       <div class="controls">
-        <input type="text" class="input input-xlarge" name="address" value="<?=$place[address]?>" id="">
+        <input type="text" class="input input-xlarge" name="address" value="<?php echo $place['address']; ?>" id="">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="">URL</label>
       <div class="controls">
-        <input type="text" class="input input-xlarge" name="uri" value="<?=$place[uri]?>" id="">
+        <input type="text" class="input input-xlarge" name="uri" value="<?php echo $place['uri']; ?>" id="">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="">Description</label>
       <div class="controls">
-        <textarea class="input input-xlarge" name="description"><?=$place[description]?></textarea>
+        <textarea class="input input-xlarge" name="description"><?php echo $place['description']; ?></textarea>
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="">Submitter Name</label>
       <div class="controls">
-        <input type="text" class="input input-xlarge" name="owner_name" value="<?=$place[owner_name]?>" id="">
+        <input type="text" class="input input-xlarge" name="owner_name" value="<?php echo $place['owner_name']; ?>" id="">
       </div>
     </div>
     <div class="control-group">
       <label class="control-label" for="">Submitter Email</label>
       <div class="controls">
-        <input type="text" class="input input-xlarge" name="owner_email" value="<?=$place[owner_email]?>" id="">
+        <input type="text" class="input input-xlarge" name="owner_email" value="<?php echo $place['owner_email']; ?>" id="">
       </div>
     </div>
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Save Changes</button>
       <input type="hidden" name="task" value="doedit" />
-      <input type="hidden" name="place_id" value="<?=$place[id]?>" />
-      <input type="hidden" name="view" value="<?=$view?>" />
-      <input type="hidden" name="search" value="<?=$search?>" />
-      <input type="hidden" name="p" value="<?=$p?>" />
+      <input type="hidden" name="place_id" value="<?php echo $place['id']; ?>" />
+      <input type="hidden" name="view" value="<?php echo $view; ?>" />
+      <input type="hidden" name="search" value="<?php echo $search; ?>" />
+      <input type="hidden" name="p" value="<?php echo $p; ?>" />
       <a href="index.php" class="btn" style="float: right;">Cancel</a>
     </div>
   </fieldset>
@@ -113,4 +114,4 @@ if($task == "doedit") {
 
 
 
-<? echo $admin_foot; ?>
+<?php echo $admin_foot; ?>

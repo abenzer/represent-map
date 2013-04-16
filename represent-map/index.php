@@ -132,7 +132,7 @@ include_once "header.php";
         var myOptions = {
           zoom: 11,
           //minZoom: 10,
-          center: new google.maps.LatLng(34.034453,-118.341293),
+          center: new google.maps.LatLng(37.786602,-122.399201),
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           streetViewControl: false,
           mapTypeControl: false,
@@ -176,37 +176,39 @@ include_once "header.php";
               Array('event', 'Events'),
               );
           $marker_id = 0;
+          $count = array();
           foreach($types as $type) {
             $places = mysql_query("SELECT * FROM places WHERE approved='1' AND type='$type[0]' ORDER BY title");
             $places_total = mysql_num_rows($places);
             while($place = mysql_fetch_assoc($places)) {
-              $place[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[title])));
-              $place[description] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[description])));
-              $place[uri] = addslashes(htmlspecialchars($place[uri]));
-              $place[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[address])));
+              $place['title'] = htmlspecialchars_decode(addslashes(htmlspecialchars($place['title'])));
+              $place['description'] = htmlspecialchars_decode(addslashes(htmlspecialchars($place['description'])));
+              $place['uri'] = addslashes(htmlspecialchars($place['uri']));
+              $place['address'] = htmlspecialchars_decode(addslashes(htmlspecialchars($place['address'])));
               echo "
-                markers.push(['".$place[title]."', '".$place[type]."', '".$place[lat]."', '".$place[lng]."', '".$place[description]."', '".$place[uri]."', '".$place[address]."']); 
-                markerTitles[".$marker_id."] = '".$place[title]."';
-              "; 
-              $count[$place[type]]++;
+                markers.push(['".$place['title']."', '".$place['type']."', '".$place['lat']."', '".$place['lng']."', '".$place['description']."', '".$place['uri']."', '".$place['address']."']); 
+                markerTitles[".$marker_id."] = '".$place['title']."';
+              ";
+              if (!array_key_exists($place['type'], $count)) $count[$place['type']] = 0;
+              $count[$place['type']]++;
               $marker_id++;
             }
           } 
           if($show_events == true) {
-            $place[type] = "event";
+            $place['type'] = "event";
             $events = mysql_query("SELECT * FROM events WHERE start_date > ".time()." AND start_date < ".(time()+4838400)." ORDER BY id DESC");
             $events_total = mysql_num_rows($events);
             while($event = mysql_fetch_assoc($events)) {
-              $event[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($event[title])));
-              $event[description] = htmlspecialchars_decode(addslashes(htmlspecialchars($event[description])));
-              $event[uri] = addslashes(htmlspecialchars($event[uri]));
-              $event[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($event[address])));
+              $event['title'] = htmlspecialchars_decode(addslashes(htmlspecialchars($event['title'])));
+              $event['description'] = htmlspecialchars_decode(addslashes(htmlspecialchars($event['description'])));
+              $event['uri'] = addslashes(htmlspecialchars($event['uri']));
+              $event['address'] = htmlspecialchars_decode(addslashes(htmlspecialchars($event['address'])));
               $event[start_date] = date("D, M j @ g:ia", $event[start_date]);
               echo "
-                markers.push(['".$event[title]."', 'event', '".$event[lat]."', '".$event[lng]."', '".$event[start_date]."', '".$event[uri]."', '".$event[address]."']); 
-                markerTitles[".$marker_id."] = '".$event[title]."';
+                markers.push(['".$event['title']."', 'event', '".$event['lat']."', '".$event['lng']."', '".$event[start_date]."', '".$event['uri']."', '".$event['address']."']); 
+                markerTitles[".$marker_id."] = '".$event['title']."';
               "; 
-              $count[$place[type]]++;
+              $count[$place['type']]++;
               $marker_id++;
             }
           }
@@ -365,7 +367,7 @@ include_once "header.php";
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     
-    <? echo $head_html; ?>
+    <?php echo $head_html; ?>
   </head>
   <body>
     
@@ -405,9 +407,9 @@ include_once "header.php";
             <a href="#modal_info" class="btn btn-large btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i>About this Map</a>
             <?php if($sg_enabled) { ?>
               <a href="#modal_add_choose" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
-            <? } else { ?>
+            <?php } else { ?>
               <a href="#modal_add" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
-            <? } ?>
+            <?php } ?>
           </div>
           <div class="search">
             <input type="text" name="search" id="search" placeholder="Search for companies..." data-provide="typeahead" autocomplete="off" />
@@ -450,8 +452,8 @@ include_once "header.php";
             ";
             while($marker = mysql_fetch_assoc($markers)) {
               echo "
-                  <li class='".$marker[type]."'>
-                    <a href='#' onMouseOver=\"markerListMouseOver('".$marker_id."')\" onMouseOut=\"markerListMouseOut('".$marker_id."')\" onClick=\"goToMarker('".$marker_id."');\">".$marker[title]."</a>
+                  <li class='".$marker['type']."'>
+                    <a href='#' onMouseOver=\"markerListMouseOver('".$marker_id."')\" onMouseOut=\"markerListMouseOut('".$marker_id."')\" onClick=\"goToMarker('".$marker_id."');\">".$marker['title']."</a>
                   </li>
               ";
               $marker_id++;
@@ -468,7 +470,7 @@ include_once "header.php";
         </li>
         <li class="attribution">
           <!-- per our license, you may not remove this line -->
-          <?=$attribution?>
+          <?php echo $attribution; ?>
         </li>
       </ul>
     </div>
