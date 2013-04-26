@@ -14,29 +14,29 @@ if(mysql_num_rows($interval_query) == 1) {
   $interval_info = mysql_fetch_assoc($interval_query);
   if((time()-$interval_info[sg_lastupdate]) > $sg_frequency || $_GET['override'] == "true") {
 
-    // connect to startup genome API
-    if(strpos($_SERVER['SERVER_NAME'],'.local') !== false) {
-      $config = array('api_url' => 'startupgenome.com.local/api/');
-    } else {
-      $config = array('api_url' => 'www.startupgenome.com/api');
-    }
+    //grab the location configuration. We can probably remove this and just use $sg_location directly. 
     $config['search_location'] = $sg_location;
-    $http = Http::connect($config['api_url'],false,'http');
-    try {
-      $r = $http->doGet("login/{$sg_auth_code}");
-      $j = json_decode($r,1);
-      $http->setHeaders(array("AUTH_CODE: {$sg_auth_code}"));
-      $user = $j['response'];
-    } catch(Exception $e) {
-      $error = "<div class='error'>".print_r($e)."</div>";
-      exit();
-    }
+    
+    // set the header required by the API. 
+    $headers = array("AUTH-CODE: {$sg_auth_code}");
 
-    // get organizations
-    try {
-      $r = $http->doGet("/organizations{$config['search_location']}");
-      $places_arr = json_decode($r, 1);
+    // connect to startup genome API using cURL
+    $curl = curl_init();
 
+    // Set some options
+    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($curl, CURLINFO_HEADER_OUT, true);
+    curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($curl, CURLOPT_URL, "http://startupgenome.com/api/organizations{$config['search_location']}");
+
+    // Send the request & save response to $resp
+    $resp = curl_exec($curl);
+    
+    // Close request to clear up some resources
+    curl_close($curl);    
+    
+      $places_arr = json_decode($resp, 1);
+      
       // update organizations in local db
       $org_array = Array();
       foreach ($places_arr['response'] as $key => $place) {
@@ -111,17 +111,6 @@ if(mysql_num_rows($interval_query) == 1) {
 
       // update settings table with the timestamp for this sync
       mysql_query("UPDATE settings SET sg_lastupdate='".time()."'");
-
-    // show errors if there were any issues
-    } catch (Exception $e) {
-      echo "<div class='error'>";
-      print_r($e);
-      echo "</div>";
-      exit();
-    }
-    
-    
-    
   }
 }
 
