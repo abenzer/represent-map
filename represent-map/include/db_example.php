@@ -90,6 +90,9 @@ $head_html = "";
 // The <title></title> tag
 $title_tag = "represent.la - map of the Los Angeles startup community";
 
+// The latitude & longitude to center the initial map
+$lat_lng = "34.034453,-118.341293";
+
 // attribution (must leave link intact, per our license)
 $attribution = "
   <span>
