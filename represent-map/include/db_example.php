@@ -96,9 +96,9 @@ $lat_lng = "34.034453,-118.341293";
 // Domain to use for various links
 $domain = "http://www.represent.la";
 
-$twitter_share = array(
-  "text" => "Let's put Los Angeles startups on the map:",
-  "via" => "representla"
+$twitter = array(
+  "share_text" => "Let's put Los Angeles startups on the map:",
+  "username" => "representla"
 );
 
 
