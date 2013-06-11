@@ -101,6 +101,7 @@ $twitter = array(
   "username" => "representla"
 );
 
+$blurb = "This map was made to connect and promote the Los Angeles tech startup community.  Let's put LA on the map!";
 
 // attribution (must leave link intact, per our license)
 $attribution = "

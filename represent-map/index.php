@@ -462,10 +462,7 @@ include_once "header.php";
             ";
           }
         ?>
-        <li class="blurb">
-          This map was made to connect and promote the Los Angeles tech startup community.
-          Let's put LA on the map!
-        </li>
+        <li class="blurb"><?= $blurb ?></li>
         <li class="attribution">
           <!-- per our license, you may not remove this line -->
           <?=$attribution?>
