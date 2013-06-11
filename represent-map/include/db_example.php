@@ -87,6 +87,9 @@ $show_events = true;
 // HTML that goes just before </head>
 $head_html = "";
 
+// The <title></title> tag
+$title_tag = "represent.la - map of the Los Angeles startup community";
+
 // attribution (must leave link intact, per our license)
 $attribution = "
   <span>
