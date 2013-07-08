@@ -64,7 +64,7 @@ if($task == "doedit") {
           <option<? if($place[type] == "accelerator") {?> selected="selected"<? } ?>>accelerator</option>
           <option<? if($place[type] == "incubator") {?> selected="selected"<? } ?>>incubator</option>
           <option<? if($place[type] == "coworking") {?> selected="selected"<? } ?>>coworking</option>
-          <option<? if($place[type] == "food") {?> selected="selected"<? } ?>>food</option>
+          <option<? if($place[type] == "investor") {?> selected="selected"<? } ?>>investor</option>
           <option<? if($place[type] == "service") {?> selected="selected"<? } ?>>service</option>
           <option<? if($place[type] == "hackerspace") {?> selected="selected"<? } ?>>hackerspace</option>
         </select>
