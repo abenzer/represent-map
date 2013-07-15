@@ -215,11 +215,10 @@ html, body, #map_canvas
   z-index: 3;
   right: 0;
   top: 0;
-  height: 100px;
+  height: 100%;
   border-left: 1px solid #ccc;
   border-top: 1px solid #ccc;
   overflow-y: scroll;
-  height: 100px;
   background-color: #333;
 }
 .typeahead.dropdown-menu
