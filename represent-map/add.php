@@ -4,13 +4,13 @@ include_once "header.php";
 // This is used to submit new markers for review.
 // Markers won't appear on the map until they are approved.
 
-$owner_name = parseInput($_POST['owner_name']);
-$owner_email = parseInput($_POST['owner_email']);
-$title = parseInput($_POST['title']);
-$type = parseInput($_POST['type']);
-$address = parseInput($_POST['address']);
-$uri = parseInput($_POST['uri']);
-$description = parseInput($_POST['description']);
+$owner_name = mysql_real_escape_string(parseInput($_POST['owner_name']));
+$owner_email = mysql_real_escape_string(parseInput($_POST['owner_email']));
+$title = mysql_real_escape_string(parseInput($_POST['title']));
+$type = mysql_real_escape_string(parseInput($_POST['type']));
+$address = mysql_real_escape_string(parseInput($_POST['address']));
+$uri = mysql_real_escape_string(parseInput($_POST['uri']));
+$description = mysql_real_escape_string(parseInput($_POST['description']));
 
 // validate fields
 if(empty($title) || empty($type) || empty($address) || empty($uri) || empty($description) || empty($owner_name) || empty($owner_email)) {
