@@ -33,7 +33,7 @@ Installation
 Setup should be super easy. Follow these steps:
 
 1. Create a new MySQL database and user.
-2. Use phpMyAdmin or another MySQL utility to run the newest "places" and "settings" SQL files in the /db directory.
+2. Use phpMyAdmin or another MySQL utility to run each of the SQL files in the /db directory.
 3. Open /include/db_example.php with your text editor. Enter your MySQL credentials in there. Also, replace "letsgetmappy" with a new password for the admin panel. Rename the file to "db.php".
 4. Upload all of the files to your server.
 5. You'll probably want to comb through index.php with your favorite text editor and replace all the RepresentLA content
