@@ -150,3 +150,8 @@ textarea.input
 {
   margin-bottom: 20px;
 }
+
+/* fix Bootstrap max-width issue with Google Maps */
+#map img{
+  max-width: 1000px;
+}
