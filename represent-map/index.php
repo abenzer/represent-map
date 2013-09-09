@@ -14,7 +14,7 @@ include_once "header.php";
     Create a map for your startup community!
     https://github.com/abenzer/represent-map
     -->
-    <title>represent.la - map of the Los Angeles startup community</title>
+    <title><?= $title_tag ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -132,7 +132,7 @@ include_once "header.php";
         var myOptions = {
           zoom: 11,
           //minZoom: 10,
-          center: new google.maps.LatLng(34.034453,-118.341293),
+          center: new google.maps.LatLng(<?= $lat_lng ?>),
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           streetViewControl: false,
           mapTypeControl: false,
@@ -390,9 +390,9 @@ include_once "header.php";
       <div class="wrapper">
         <div class="right">
           <div class="share">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.represent.la" data-text="Let's put Los Angeles startups on the map:" data-via="representla" data-count="none">Tweet</a>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?= $domain ?>" data-text="<?= $twitter['share_text'] ?>" data-via="<?= $twitter['username'] ?>" data-count="none">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            <div class="fb-like" data-href="http://www.represent.la" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
+            <div class="fb-like" data-href="<?= $domain ?>" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
           </div>
         </div>
         <div class="left">
@@ -462,10 +462,7 @@ include_once "header.php";
             ";
           }
         ?>
-        <li class="blurb">
-          This map was made to connect and promote the Los Angeles tech startup community.
-          Let's put LA on the map!
-        </li>
+        <li class="blurb"><?= $blurb ?></li>
         <li class="attribution">
           <!-- per our license, you may not remove this line -->
           <?=$attribution?>
@@ -492,7 +489,7 @@ include_once "header.php";
           Let's put LA on the map together!
         </p>
         <p>
-          Questions? Feedback? Connect with us: <a href="http://www.twitter.com/representla" target="_blank">@representla</a>
+        Questions? Feedback? Connect with us: <a href="http://www.twitter.com/<?= $twitter['username'] ?>" target="_blank">@<?= $twitter['username'] ?></a>
         </p>
         <p>
           If you want to support the LA community by linking to this map from your website,
