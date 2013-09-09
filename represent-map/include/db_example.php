@@ -71,9 +71,9 @@ $show_events = true;
     $eb_app_key = "";
 
     // search eventbrite for these keywords
-    // add %20OR%20 between keywords for an "OR" search
-    // example: startup%20OR%20demo+day
-    $eb_keywords = "startup%20OR%20startups";
+    // use "+" for spaces
+    // e.g. 'startup', 'startups', 'demo+day'
+    $eb_keywords = join("%20OR%20", array('startup', 'startups')); 
 
     // specify city to search in and around
     // example: Santa+Monica
