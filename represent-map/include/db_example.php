@@ -1,5 +1,4 @@
 <?php
-date_default_timezone_set("America/Los_Angeles");
 
 // mysql hostname
 $db_host = "";
@@ -84,6 +83,8 @@ $show_events = true;
     $eb_within_radius = 50;
 
 
+// set timezone
+// date_default_timezone_set("America/Los_Angeles");
 
 // HTML that goes just before </head>
 $head_html = "";
@@ -97,11 +98,13 @@ $lat_lng = "34.034453,-118.341293";
 // Domain to use for various links
 $domain = "http://www.represent.la";
 
+// Twitter username and default share text
 $twitter = array(
   "share_text" => "Let's put Los Angeles startups on the map:",
   "username" => "representla"
 );
 
+// Short blurb about this site (visible to visitors)
 $blurb = "This map was made to connect and promote the Los Angeles tech startup community.  Let's put LA on the map!";
 
 // attribution (must leave link intact, per our license)
