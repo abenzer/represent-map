@@ -181,7 +181,7 @@ include_once "header.php";
             $places_total = mysql_num_rows($places);
             while($place = mysql_fetch_assoc($places)) {
               $place[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[title])));
-              $place[description] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[description])));
+              $place[description] = str_replace(array("\n", "\t", "\r"), "", htmlspecialchars_decode(addslashes(htmlspecialchars($place[description]))));
               $place[uri] = addslashes(htmlspecialchars($place[uri]));
               $place[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[address])));
               echo "
