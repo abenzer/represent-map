@@ -132,7 +132,7 @@ include_once "header.php";
         var myOptions = {
           zoom: 11,
           //minZoom: 10,
-          center: new google.maps.LatLng(34.034453,-118.341293),
+          center: new google.maps.LatLng(10.774036506178824,106.68582916259766),
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           streetViewControl: false,
           mapTypeControl: false,
@@ -307,6 +307,7 @@ include_once "header.php";
             $("#search").val("");
           }
         });
+        initAddMarker();
       } 
 
 
@@ -362,6 +363,46 @@ include_once "header.php";
         $("#marker"+marker_id).css("display", "none");
       }
 
+      // geocode from latlng to address
+    window.pmaker = null;
+    function initAddMarker(){
+    window.geocoder = new google.maps.Geocoder();
+    
+    // prepare and add dropable marker
+    $('#modal_add_btn').on('click', function(){
+      if(!window.pmaker){     
+        window.pmaker = new google.maps.Marker({
+          map: map,
+          draggable: true,
+          animation: google.maps.Animation.DROP,
+          position: map.getCenter()
+        });
+        
+        pmaker.setMap(map);
+
+        window.geocoder.geocode({location: map.getCenter()}, function(rsp){
+          $('#add_address').val(rsp[0].formatted_address);
+        });
+        
+        google.maps.event.addListener(window.pmaker, 'dragend', function(e){
+          window.geocoder.geocode({location: e.latLng}, function(rsp){
+            $('#add_address').val(rsp[0].formatted_address);
+          });
+           $('#glatitude').val(e.latLng.lat());
+           $('#glongitude').val(e.latLng.lng());
+        });
+        
+        google.maps.event.addListener(window.pmaker, 'click', function(e){
+          $('#modal_add').modal('show');
+        });
+        
+         // set lat lng when user don't move the marker
+        $('#glatitude').val(map.getCenter().lat());
+        $('#glongitude').val(map.getCenter().lng());
+        
+      }
+    });
+    }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     
@@ -404,9 +445,9 @@ include_once "header.php";
           <div class="buttons">
             <a href="#modal_info" class="btn btn-large btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i>About this Map</a>
             <?php if($sg_enabled) { ?>
-              <a href="#modal_add_choose" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
+              <a href="#modal_add_choose" id="modal_add_btn" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
             <? } else { ?>
-              <a href="#modal_add" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
+              <a href="#modal_add" id="modal_add_btn" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
             <? } ?>
           </div>
           <div class="search">

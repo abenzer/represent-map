@@ -41,6 +41,7 @@ $total_all = mysql_num_rows(mysql_query("SELECT id FROM places"));
 $admin_head = "
   <html>
   <head>
+    <meta charset='UTF-8'>
     <title>RepresentMap Admin</title>
     <link href='../bootstrap/css/bootstrap.css' rel='stylesheet' type='text/css' />
     <link href='../bootstrap/css/bootstrap-responsive.css' rel='stylesheet' type='text/css' />

@@ -1,7 +1,7 @@
 <?php
 $page = "index";
 include "header.php";
-
+mysql_query("SET NAMES 'utf8'"); // for special chars like Vietnamese
 
 // hide marker on map
 if($task == "hide") {
