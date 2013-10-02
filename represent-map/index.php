@@ -14,7 +14,7 @@ include_once "header.php";
     Create a map for your startup community!
     https://github.com/abenzer/represent-map
     -->
-    <title>represent.la - map of the Los Angeles startup community</title>
+    <title><?= $title_tag ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta charset="UTF-8">
     <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700|Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -132,7 +132,7 @@ include_once "header.php";
         var myOptions = {
           zoom: 11,
           //minZoom: 10,
-          center: new google.maps.LatLng(10.774036506178824,106.68582916259766),
+          center: new google.maps.LatLng(<?= $lat_lng ?>),
           mapTypeId: google.maps.MapTypeId.ROADMAP,
           streetViewControl: false,
           mapTypeControl: false,
@@ -181,7 +181,7 @@ include_once "header.php";
             $places_total = mysql_num_rows($places);
             while($place = mysql_fetch_assoc($places)) {
               $place[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[title])));
-              $place[description] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[description])));
+              $place[description] = str_replace(array("\n", "\t", "\r"), "", htmlspecialchars_decode(addslashes(htmlspecialchars($place[description]))));
               $place[uri] = addslashes(htmlspecialchars($place[uri]));
               $place[address] = htmlspecialchars_decode(addslashes(htmlspecialchars($place[address])));
               echo "
@@ -194,7 +194,7 @@ include_once "header.php";
           } 
           if($show_events == true) {
             $place[type] = "event";
-            $events = mysql_query("SELECT * FROM events WHERE start_date > ".time()." AND start_date < ".(time()+4838400)." ORDER BY id DESC");
+            $events = mysql_query("SELECT * FROM events WHERE start_date > ".time()." AND start_date < ".(time()+9676800)." ORDER BY id DESC");
             $events_total = mysql_num_rows($events);
             while($event = mysql_fetch_assoc($events)) {
               $event[title] = htmlspecialchars_decode(addslashes(htmlspecialchars($event[title])));
@@ -307,7 +307,6 @@ include_once "header.php";
             $("#search").val("");
           }
         });
-        initAddMarker();
       } 
 
 
@@ -363,46 +362,6 @@ include_once "header.php";
         $("#marker"+marker_id).css("display", "none");
       }
 
-      // geocode from latlng to address
-    window.pmaker = null;
-    function initAddMarker(){
-    window.geocoder = new google.maps.Geocoder();
-    
-    // prepare and add dropable marker
-    $('#modal_add_btn').on('click', function(){
-      if(!window.pmaker){     
-        window.pmaker = new google.maps.Marker({
-          map: map,
-          draggable: true,
-          animation: google.maps.Animation.DROP,
-          position: map.getCenter()
-        });
-        
-        pmaker.setMap(map);
-
-        window.geocoder.geocode({location: map.getCenter()}, function(rsp){
-          $('#add_address').val(rsp[0].formatted_address);
-        });
-        
-        google.maps.event.addListener(window.pmaker, 'dragend', function(e){
-          window.geocoder.geocode({location: e.latLng}, function(rsp){
-            $('#add_address').val(rsp[0].formatted_address);
-          });
-           $('#glatitude').val(e.latLng.lat());
-           $('#glongitude').val(e.latLng.lng());
-        });
-        
-        google.maps.event.addListener(window.pmaker, 'click', function(e){
-          $('#modal_add').modal('show');
-        });
-        
-         // set lat lng when user don't move the marker
-        $('#glatitude').val(map.getCenter().lat());
-        $('#glongitude').val(map.getCenter().lng());
-        
-      }
-    });
-    }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
     
@@ -431,9 +390,9 @@ include_once "header.php";
       <div class="wrapper">
         <div class="right">
           <div class="share">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.represent.la" data-text="Let's put Los Angeles startups on the map:" data-via="representla" data-count="none">Tweet</a>
+          <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?= $domain ?>" data-text="<?= $twitter['share_text'] ?>" data-via="<?= $twitter['username'] ?>" data-count="none">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-            <div class="fb-like" data-href="http://www.represent.la" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
+            <div class="fb-like" data-href="<?= $domain ?>" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="arial"></div>
           </div>
         </div>
         <div class="left">
@@ -445,9 +404,9 @@ include_once "header.php";
           <div class="buttons">
             <a href="#modal_info" class="btn btn-large btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i>About this Map</a>
             <?php if($sg_enabled) { ?>
-              <a href="#modal_add_choose" id="modal_add_btn" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
+              <a href="#modal_add_choose" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
             <? } else { ?>
-              <a href="#modal_add" id="modal_add_btn" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
+              <a href="#modal_add" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
             <? } ?>
           </div>
           <div class="search">
@@ -503,10 +462,7 @@ include_once "header.php";
             ";
           }
         ?>
-        <li class="blurb">
-          This map was made to connect and promote the Los Angeles tech startup community.
-          Let's put LA on the map!
-        </li>
+        <li class="blurb"><?= $blurb ?></li>
         <li class="attribution">
           <!-- per our license, you may not remove this line -->
           <?=$attribution?>
@@ -533,7 +489,7 @@ include_once "header.php";
           Let's put LA on the map together!
         </p>
         <p>
-          Questions? Feedback? Connect with us: <a href="http://www.twitter.com/representla" target="_blank">@representla</a>
+        Questions? Feedback? Connect with us: <a href="http://www.twitter.com/<?= $twitter['username'] ?>" target="_blank">@<?= $twitter['username'] ?></a>
         </p>
         <p>
           If you want to support the LA community by linking to this map from your website,

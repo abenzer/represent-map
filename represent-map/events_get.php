@@ -16,7 +16,7 @@ include "geocode.php";
 function getEventbriteEvents($eb_keywords, $eb_city, $eb_proximity) {
   global $eb_app_key;
 
-  $xml_url = "https://www.eventbrite.com/xml/event_search?...&within=50&within_unit=M&keywords=".$eb_keywords."&city=".$eb_city."&date=This+month&app_key=".$eb_app_key;
+  $xml_url = "https://www.eventbrite.com/xml/event_search?...&within=".$eb_proximity."&within_unit=M&keywords=".$eb_keywords."&city=".$eb_city."&date=Future&app_key=".$eb_app_key;
   echo $xml_url."<br />";
   $xml = simplexml_load_file($xml_url);
   $count = 0;
