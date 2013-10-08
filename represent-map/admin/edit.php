@@ -10,7 +10,7 @@ if(isset($_GET['place_id'])) {
   exit; 
 }
 
-
+mysql_query("SET NAMES 'utf8'");
 // get place info
 $place_query = mysql_query("SELECT * FROM places WHERE id='$place_id' LIMIT 1");
 if(mysql_num_rows($place_query) != 1) { exit; }
