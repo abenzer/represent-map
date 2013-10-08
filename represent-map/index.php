@@ -176,6 +176,7 @@ include_once "header.php";
               Array('event', 'Events'),
               );
           $marker_id = 0;
+          mysql_query("SET NAMES 'utf8'");
           foreach($types as $type) {
             $places = mysql_query("SELECT * FROM places WHERE approved='1' AND type='$type[0]' ORDER BY title");
             $places_total = mysql_num_rows($places);
