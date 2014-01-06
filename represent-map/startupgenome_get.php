@@ -6,7 +6,7 @@ include_once "header.php";
 // organizations that have been added to your Startup Genome map.
 // If it finds any, it will add them to your local database.
 
-// This script will only run if we haven't checked for new only 
+// This script will only run if we haven't checked for new only
 // if the frequency interval specified in db.php has already passed.
 
 $interval_query = mysql_query("SELECT sg_lastupdate FROM settings LIMIT 1");
@@ -18,15 +18,17 @@ if(mysql_num_rows($interval_query) == 1) {
     if(strpos($_SERVER['SERVER_NAME'],'.local') !== false) {
       $config = array('api_url' => 'startupgenome.com.local/api/');
     } else {
-      $config = array('api_url' => 'www.startupgenome.com/api');
+      $config = array('api_url' => 'startupgenome.co/api');
     }
     $config['search_location'] = $sg_location;
     $http = Http::connect($config['api_url'],false,'http');
+
     try {
       $r = $http->doGet("login/{$sg_auth_code}");
       $j = json_decode($r,1);
-      $http->setHeaders(array("AUTH_CODE: {$sg_auth_code}"));
+      $http->setHeaders(array("AUTH-CODE: {$sg_auth_code}"));
       $user = $j['response'];
+
     } catch(Exception $e) {
       $error = "<div class='error'>".print_r($e)."</div>";
       exit();
@@ -50,7 +52,7 @@ if(mysql_num_rows($interval_query) == 1) {
           case '5': $place[type] = 'incubator'; break;
           case '6': $place[type] = 'coworking'; break;
         }
-        
+
         // format the address for display
         $place[address] = $place['address1'];
         $place[address] .= ($place['address2']?($place[address]?', ':'').$place['address2']:'');
@@ -64,11 +66,11 @@ if(mysql_num_rows($interval_query) == 1) {
         $marker_id++;
 
         $place_query = mysql_query("SELECT id FROM places WHERE sg_organization_id='".$place['organization_id']."' LIMIT 1") or die(mysql_error());
-        
+
         // organization doesn't exist, add it to the db
         if(mysql_num_rows($place_query) == 0) {
           mysql_query("INSERT INTO places (approved,
-                                          title, 
+                                          title,
                                           type,
                                           lat,
                                           lng,
@@ -77,17 +79,17 @@ if(mysql_num_rows($interval_query) == 1) {
                                           description,
                                           sg_organization_id
                                           ) VALUES (
-                                          '1', 
-                                          '".parseInput($place['name'])."', 
-                                          '".parseInput($place['type'])."', 
-                                          '".parseInput($place['latitude'])."', 
-                                          '".parseInput($place['longitude'])."', 
+                                          '1',
+                                          '".parseInput($place['name'])."',
+                                          '".parseInput($place['type'])."',
+                                          '".parseInput($place['latitude'])."',
+                                          '".parseInput($place['longitude'])."',
                                           '".parseInput($place['address'])."',
                                           '".parseInput($place['url'])."',
                                           '".parseInput($place['description'])."',
                                           '".parseInput($place['organization_id'])."'
                                           )") or die(mysql_error());
-          
+
         // organization already exists, update it with new info if necessary
         } else if(mysql_num_rows($place_query) == 1) {
           $place_info = mysql_fetch_assoc($place_query);
@@ -101,10 +103,10 @@ if(mysql_num_rows($interval_query) == 1) {
                                            description='".parseInput($place['description'])."'
                                            WHERE sg_organization_id='".parseInput($place['organization_id'])."' LIMIT 1");
           }
-          
+
         }
       }
-      
+
       // delete any old markers that have already been deleted on SG
       $org_array = implode(",", $org_array);
       $deleted = mysql_query("DELETE FROM places WHERE sg_organization_id NOT IN ({$org_array})") or die(mysql_error());
@@ -119,9 +121,9 @@ if(mysql_num_rows($interval_query) == 1) {
       echo "</div>";
       exit();
     }
-    
-    
-    
+
+
+
   }
 }
 
