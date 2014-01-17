@@ -23,6 +23,12 @@ Check out some of the maps using the this code here:
 http://representmap.com
 
 
+RepresentMap Meta-Map
+---------------------
+For a map of all the places in the world using RepresentMap, [go to
+RepresentMap.com](http://representmap.com).
+
+
 Requirements
 ------------
 
