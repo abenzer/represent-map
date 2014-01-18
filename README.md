@@ -19,6 +19,9 @@ RepresentMap was created by:
 - Tara Tiger Brown (http://www.twitter.com/tara)
 - Sean Bonner (http://www.twitter.com/seanbonner)
 
+Check out some of the maps using the this code here:
+http://representmap.com
+
 
 Requirements
 ------------
