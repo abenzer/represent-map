@@ -20,12 +20,6 @@ RepresentMap was created by:
 - Sean Bonner (http://www.twitter.com/seanbonner)
 
 
-RepresentMap Meta-Map
----------------------
-For a map of all the places in the world using RepresentMap, [go to
-RepresentMap.com](http://representmap.com).
-
-
 Requirements
 ------------
 
