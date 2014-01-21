@@ -54,20 +54,20 @@ $icons_html = "
 <p>
 If you want to support the LA community by linking to this map from your
 website, here are some badges you might like to use. You can also grab the <a
-href="./images/badges/LA-icon.ai">LA icon AI file</a>.
+href='./images/badges/LA-icon.ai'>LA icon AI file</a>.
 </p>
-<ul class="badges">
+<ul class='badges'>
   <li>
-    <img src="./images/badges/badge1.png" alt="">
+    <img src='./images/badges/badge1.png' alt=''>
   </li>
   <li>
-    <img src="./images/badges/badge1_small.png" alt="">
+    <img src='./images/badges/badge1_small.png' alt=''>
   </li>
   <li>
-    <img src="./images/badges/badge2.png" alt="">
+    <img src='./images/badges/badge2.png' alt=''>
   </li>
   <li>
-    <img src="./images/badges/badge2_small.png" alt="">
+    <img src='./images/badges/badge2_small.png' alt=''>
   </li>
 </ul>
 ";
