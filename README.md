@@ -37,7 +37,7 @@ Setup should be super easy. Follow these steps:
 
 1. Create a new MySQL database and user.
 2. Use phpMyAdmin or another MySQL utility to run each of the SQL files in the /db directory.
-3. Open /include/db_example.php with your text editor. Enter your MySQL credentials in there. Also, replace "letsgetmappy" with a new password for the admin panel. Rename the file to "db.php".
+3. Open /include/config_example.php with your text editor. Enter your MySQL credentials in there. Also, replace "letsgetmappy" with a new password for the admin panel. Rename the file to "config.php".
 4. Upload all of the files to your server.
 5. You'll probably want to comb through index.php with your favorite text editor and replace all the RepresentLA content
    (logo, "more info" text, Twitter/Facebook share buttons, etc.) with your own stuff.
@@ -58,7 +58,7 @@ keep their profile updated over time and it's a great way to show the rest of th
 happening in your startup community. There's also nice interface that lets you and other curators 
 manage your map data.
 
-If you want to pull your map data from Startup Genome, check out the settings in your db.php.
+If you want to pull your map data from Startup Genome, check out the settings in your config.php.
 Complete instructions are provided there.
 
 Learn more about Startup Genome here: http://www.startupgenome.com
@@ -69,7 +69,7 @@ EventBrite Integration (optional)
 
 You can automatically show local events in your community on your map! Just follow these steps:
 
-1. Make sure you've configured your "db.php" with your Eventbrite API key and search parameters.
+1. Make sure you've configured your "config.php" with your Eventbrite API key and search parameters.
 2. Use phpMyAdmin or another MySQL utility to run the newest "events" SQL file in the /db directory.
 3. Run "events_get.php" in your browser anytime you want to get new events. By default, events
    should be displayed on your map up to 1 month before their start date.

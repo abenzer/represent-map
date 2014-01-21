@@ -1,5 +1,5 @@
 <?php
-include "../include/db.php";
+include "../include/config.php";
 // get task
 if(isset($_GET['task'])) { $task = $_GET['task']; } 
 else if(isset($_POST['task'])) { $task = $_POST['task']; }
@@ -102,7 +102,7 @@ $admin_head .= "
 if($sg_enabled) {
   $admin_head .= "
     <div class='alert alert-info'>
-      Note: You have Startup Genome integration enabled in your config file (/include/db.php).
+      Note: You have Startup Genome integration enabled in your config file (/include/config.php).
       If you want to make changes to the markers on your map, please do so from the 
       <a href='http://www.startupgenome.com'>Startup Genome website</a>. Any changes
       you make here may not persist on your map unless you turn off Startup Genome mode.
