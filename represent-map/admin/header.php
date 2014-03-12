@@ -42,6 +42,7 @@ $admin_head = "
   <html>
   <head>
     <title>RepresentMap Admin</title>
+    <meta charset='UTF-8'>
     <link href='../bootstrap/css/bootstrap.css' rel='stylesheet' type='text/css' />
     <link href='../bootstrap/css/bootstrap-responsive.css' rel='stylesheet' type='text/css' />
     <link rel='stylesheet' href='admin.css' type='text/css' />
