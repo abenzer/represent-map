@@ -1,0 +1,4 @@
+# so you don't accidentally commit your production credentials
+represent-map/include/db.php
+
+.vagrant

@@ -89,6 +89,21 @@ on your map unless you've been given explicit, written permission from any of th
 remove it.
 
 
+Contributing / Development
+--------------------------
+
+For development purposes, a [Vagrant](http://www.vagrantup.com/) virtual machine
+configuration has been added. Once Vagrant and VirtualBox (or your Vagrant
+provider of choice) have been installed, you can get an instance of RepresentMap
+up and running quickly with
+
+    vagrant up
+
+This will download and start the virtual machine, install all of the required
+software to run RepresentMap, and configure MySQL and Apache. You will then be
+able to access the map via http://localhost:8080
+
+
 Useful Links
 ------------
 
