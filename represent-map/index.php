@@ -1,6 +1,30 @@
 <?php
 if(!file_exists('include/db.php')) require_once('installer.php');
 include_once "header.php";
+
+if(file_exists('include/url_routes.php')) {
+    include_once 'include/url_routes.php';
+    require_once 'Breeze.php';
+
+    get(';/(.*)$;', function($app, $params) {
+        global $url_routes;
+        global $lat_lng;
+        global $zoom_level;
+
+        //cleanup param
+        $params[1] = str_replace(array('%20', ' ', '-', '_'), '', $params[1]);
+
+        if(array_key_exists($params[1], $url_routes)) {
+            $data = split(',', $url_routes[$params[1]]);
+            $lat_lng = $data[0] . "," . $data[1];
+            if(count($data) > 2) {
+                $zoom_level = $data[2];
+            }
+        }
+    });
+
+    run();
+}
 ?>
 
 <!DOCTYPE html>
@@ -131,7 +155,7 @@ include_once "header.php";
 
         // set map options
         var myOptions = {
-          zoom: 11,
+          zoom: <?= (isset($zoom_level) ? $zoom_level : 11) ?>,
           //minZoom: 10,
           center: new google.maps.LatLng(<?= $lat_lng ?>),
           mapTypeId: google.maps.MapTypeId.ROADMAP,
