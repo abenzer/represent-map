@@ -14,7 +14,7 @@ Setup
 -----
 
 1. Your webserver will need [URL Rewriting
-   configured](https://github.com/whatthejeff/breeze/blob/master/INSTALL.md)
+   configured](https://github.com/whatthejeff/breeze/blob/master/INSTALL.md#server-configurations)
 1. In ``represent-map/include``, rename ``url_routes_example.php`` to
    ``url_routes.php``
 1. Add custom URLs to ``url_routes.php``

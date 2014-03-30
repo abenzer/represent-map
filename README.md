@@ -86,7 +86,7 @@ entire state of Michigan. By default, the map is so large, the individual
 location pins overlap. To quickly see just
 [Detroit](https://representmi.com/detroit), RepresentMap can support extra
 custom URLs by configuring them with ``url_routes.php``. For more details, see
-url_routes.md
+[url_routes.md](https://github.com/charlesthomas/represent-map/blob/url_routing/url_routes.md)
 
 
 License
