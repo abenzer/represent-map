@@ -41,10 +41,11 @@ Setup should be super easy. Follow these steps:
 4. Upload all of the files to your server.
 5. Allow short open tags in php changing the php.ini file
 
-	// From 
-	short_open_tag = Off
-	// To
-	short_open_tag = On
+        // From 
+        short_open_tag = Off
+        // To
+        short_open_tag = On
+	
 6. You'll probably want to comb through index.php with your favorite text editor and replace all the RepresentLA content
    (logo, "more info" text, Twitter/Facebook share buttons, etc.) with your own stuff.
 7. Populate your database. We recommend seeding it with some existing data before opening it up to your local community.
