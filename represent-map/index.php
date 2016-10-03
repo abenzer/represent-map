@@ -26,7 +26,7 @@ include_once "header.php";
     <script src="./scripts/jquery-1.7.1.js" type="text/javascript" charset="utf-8"></script>
     <script src="./bootstrap/js/bootstrap.js" type="text/javascript" charset="utf-8"></script>
     <script src="./bootstrap/js/bootstrap-typeahead.js" type="text/javascript" charset="utf-8"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?sensor=false&key=<?php echo GOOGLE_MAPS_API_KEY; ?>'></script>
     <script type="text/javascript" src="./scripts/label.js"></script>
 
     <script type="text/javascript">

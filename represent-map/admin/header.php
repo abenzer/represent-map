@@ -1,21 +1,21 @@
 <?php
 include "../include/db.php";
 // get task
-if(isset($_GET['task'])) { $task = $_GET['task']; } 
+if(isset($_GET['task'])) { $task = $_GET['task']; }
 else if(isset($_POST['task'])) { $task = $_POST['task']; }
 
 // get view
-if(isset($_GET['view'])) { $view = $_GET['view']; } 
+if(isset($_GET['view'])) { $view = $_GET['view']; }
 else if(isset($_POST['view'])) { $view = $_POST['view']; }
 else { $view = ""; }
 
 // get page
-if(isset($_GET['p'])) { $p = $_GET['p']; } 
+if(isset($_GET['p'])) { $p = $_GET['p']; }
 else if(isset($_POST['p'])) { $p = $_POST['p']; }
 else { $p = 1; }
 
 // get search
-if(isset($_GET['search'])) { $search = $_GET['search']; } 
+if(isset($_GET['search'])) { $search = $_GET['search']; }
 else if(isset($_POST['search'])) { $search = $_POST['search']; }
 else { $search = ""; }
 
@@ -45,9 +45,9 @@ $admin_head = "
     <link href='../bootstrap/css/bootstrap.css' rel='stylesheet' type='text/css' />
     <link href='../bootstrap/css/bootstrap-responsive.css' rel='stylesheet' type='text/css' />
     <link rel='stylesheet' href='admin.css' type='text/css' />
-    <script src='../bootstrap/js/bootstrap.js' type='text/javascript' charset='utf-8'></script>
     <script src='../scripts/jquery-1.7.1.js' type='text/javascript' charset='utf-8'></script>
-    <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false' type='text/javascript' charset='utf-8'></script>
+    <script src='../bootstrap/js/bootstrap.js' type='text/javascript' charset='utf-8'></script>
+    <script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?sensor=false&key=" . GOOGLE_MAPS_API_KEY . "'></script>
   </head>
   <body>
 ";
@@ -103,17 +103,17 @@ if($sg_enabled) {
   $admin_head .= "
     <div class='alert alert-info'>
       Note: You have Startup Genome integration enabled in your config file (/include/db.php).
-      If you want to make changes to the markers on your map, please do so from the 
+      If you want to make changes to the markers on your map, please do so from the
       <a href='http://www.startupgenome.com'>Startup Genome website</a>. Any changes
       you make here may not persist on your map unless you turn off Startup Genome mode.
     </div>
-  ";  
+  ";
 }
 
 
 
 
-// admin footer 
+// admin footer
 $admin_foot = "
     </div>
   </body>
