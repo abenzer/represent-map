@@ -366,7 +366,7 @@ include_once "header.php";
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
-    <? echo $head_html; ?>
+    <?php echo $head_html; ?>
   </head>
   <body>
 
@@ -406,9 +406,9 @@ include_once "header.php";
             <a href="#modal_info" class="btn btn-large btn-info" data-toggle="modal"><i class="icon-info-sign icon-white"></i>About this Map</a>
             <?php if($sg_enabled) { ?>
               <a href="#modal_add_choose" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
-            <? } else { ?>
+            <?php } else { ?>
               <a href="#modal_add" class="btn btn-large btn-success" data-toggle="modal"><i class="icon-plus-sign icon-white"></i>Add Something</a>
-            <? } ?>
+            <?php } ?>
           </div>
           <div class="search">
             <input type="text" name="search" id="search" placeholder="Search for companies..." data-provide="typeahead" autocomplete="off" />
