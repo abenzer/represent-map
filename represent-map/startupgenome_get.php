@@ -7,7 +7,7 @@ include_once "header.php";
 // If it finds any, it will add them to your local database.
 
 // This script will only run if we haven't checked for new only
-// if the frequency interval specified in db.php has already passed.
+// if the frequency interval specified in config.php has already passed.
 
 $interval_query = mysql_query("SELECT sg_lastupdate FROM settings LIMIT 1");
 if(mysql_num_rows($interval_query) == 1) {

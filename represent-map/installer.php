@@ -19,7 +19,7 @@ if(isset($_POST['installer_submitted'])) {
 
 	// if not errors, proceed with installer by first creating db file
 	if(!$error) {
-		$file = 'include/db.php';
+		$file = 'include/config.php';
 		if(!$file_handle = fopen($file, 'w')) {
 			$error .= '
 				<p style="color:red;"><strong>We were unable to update the "/install" directory\'s permissions, which is required for this installer to run. Please do so manually using the below instructions:</p>
@@ -39,7 +39,7 @@ if(isset($_POST['installer_submitted'])) {
 		$config_file_contents = str_replace('[admin_user]',$_POST['admin_username'],$config_file_contents);
 		$config_file_contents = str_replace('[admin_pass]',$_POST['admin_pass'],$config_file_contents);
 
-		$file = 'include/db.php';
+		$file = 'include/config.php';
 		$file_handle = fopen($file, 'w');
 		if(!fwrite($file_handle, $config_file_contents)) {
 			$error .= '
