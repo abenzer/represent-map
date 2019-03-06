@@ -6,7 +6,7 @@ Visualize your local tech startup community on a custom Google Map. Host everyth
 About RepresentMap
 ------------------
 
-You can use RepresentMap to setup a website that visualizes your local startup 
+You can use RepresentMap to setup a website that visualizes your local startup
 community on a custom Google map.
 
 This code first came from http://represent.la, our map of the Los Angeles
@@ -35,23 +35,24 @@ Setup should be super easy. Follow these steps:
 2. Use phpMyAdmin or another MySQL utility to run each of the SQL files in the /db directory.
 3. Open /include/db_example.php with your text editor. Enter your MySQL credentials in there. Also, replace "letsgetmappy" with a new password for the admin panel. Rename the file to "db.php".
 4. Upload all of the files to your server.
-5. You'll probably want to comb through index.php with your favorite text editor and replace all the RepresentLA content
+5. Update the include/config.php file with your own Google Maps API Key (https://developers.google.com/maps/documentation/javascript/get-api-key)
+6. You'll probably want to comb through index.php with your favorite text editor and replace all the RepresentLA content
    (logo, "more info" text, Twitter/Facebook share buttons, etc.) with your own stuff.
-6. Populate your database. We recommend seeding it with some existing data before opening it up to your local community.
+7. Populate your database. We recommend seeding it with some existing data before opening it up to your local community.
    You can add markers by using the button on the map page, or by importing them with an SQL query. If you use an SQL
    query, note that you should leave the lat/long values blank when importing. Then, run geocode.php to automatically
    generate lat/long values for all your rows.
-7. Once visitors to your site have submitted their own markers, point your browser to /admin to approve/reject them.
-8. Challenge your newly-discovered neighbors to ping pong!
+8. Once visitors to your site have submitted their own markers, point your browser to /admin to approve/reject them.
+9. Challenge your newly-discovered neighbors to ping pong!
 
 
 Startup Genome Integration (optional)
 -------------------------------------
 
 Startup Genome is a project that "enables local startup communities to collect, curate, and display
-their city's data anyway they want." Integrating your map with Startup Genome will allow people to 
-keep their profile updated over time and it's a great way to show the rest of the world what's 
-happening in your startup community. There's also nice interface that lets you and other curators 
+their city's data anyway they want." Integrating your map with Startup Genome will allow people to
+keep their profile updated over time and it's a great way to show the rest of the world what's
+happening in your startup community. There's also nice interface that lets you and other curators
 manage your map data.
 
 If you want to pull your map data from Startup Genome, check out the settings in your db.php.
