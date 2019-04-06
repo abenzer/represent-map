@@ -60,13 +60,13 @@ if($task == "doedit") {
       <label class="control-label" for="">Type</label>
       <div class="controls">
         <select class="input input-xlarge" name="type">
-          <option<? if($place[type] == "startup") {?> selected="selected"<? } ?>>startup</option>
-          <option<? if($place[type] == "accelerator") {?> selected="selected"<? } ?>>accelerator</option>
-          <option<? if($place[type] == "incubator") {?> selected="selected"<? } ?>>incubator</option>
-          <option<? if($place[type] == "coworking") {?> selected="selected"<? } ?>>coworking</option>
-          <option<? if($place[type] == "investor") {?> selected="selected"<? } ?>>investor</option>
-          <option<? if($place[type] == "service") {?> selected="selected"<? } ?>>service</option>
-          <option<? if($place[type] == "hackerspace") {?> selected="selected"<? } ?>>hackerspace</option>
+          <option value='startup'<? if($place[type] == "startup") {?> selected="selected"<? } ?>>startup</option>
+          <option value='accelerator'<? if($place[type] == "accelerator") {?> selected="selected"<? } ?>>accelerator</option>
+          <option value='incubator'<? if($place[type] == "incubator") {?> selected="selected"<? } ?>>incubator</option>
+          <option value='coworking'<? if($place[type] == "coworking") {?> selected="selected"<? } ?>>coworking</option>
+          <option value='investor'<? if($place[type] == "investor") {?> selected="selected"<? } ?>>investor</option>
+          <option value='service'<? if($place[type] == "service") {?> selected="selected"<? } ?>>service</option>
+          <option value='hackerspace'<? if($place[type] == "hackerspace") {?> selected="selected"<? } ?>>hackerspace</option>
         </select>
       </div>
     </div>
