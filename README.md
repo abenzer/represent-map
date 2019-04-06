@@ -73,6 +73,18 @@ You can automatically show local events in your community on your map! Just foll
    chron on your server. If you don't know how to do that, ask your hosting provider.
 
 
+Map Subsections (optional)
+--------------------------
+
+For large maps, it may be useful to have subsections of the map exposed through
+custom URLs. For example, [RepresentMI](https://representmi.com) covers the
+entire state of Michigan. By default, the map is so large, the individual
+location pins overlap. To quickly see just
+[Detroit](https://representmi.com/detroit), RepresentMap can support extra
+custom URLs by configuring them with ``url_routes.php``. For more details, see
+[url_routes.md](https://github.com/charlesthomas/represent-map/blob/url_routing/url_routes.md)
+
+
 License
 -------
 
